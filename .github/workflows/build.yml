@@ -43,27 +43,6 @@ jobs:
         run: |
           yarn run build
 
-      - name: Upload Mac artifacts
-        uses: actions/upload-artifact@v1
-        if: startsWith(matrix.os, 'macOS')
-        with:
-          name: mac-dmg
-          path: build/dev-tasks-${{ env.APP_VERSION }}.dmg
-
-      - name: Upload Linux artifacts
-        uses: actions/upload-artifact@v1
-        if: startsWith(matrix.os, 'ubuntu')
-        with:
-          name: linux
-          path: build/dev-tasks-${{ env.APP_VERSION }}.AppImage
-
-      - name: Upload Win artifacts
-        uses: actions/upload-artifact@v1
-        if: startsWith(matrix.os, 'windows')
-        with:
-          name: win
-          path: build/dev-tasks-${{ env.APP_VERSION }}.exe
-
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
