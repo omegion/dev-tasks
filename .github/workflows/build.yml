@@ -48,21 +48,21 @@ jobs:
         if: startsWith(matrix.os, 'macOS')
         with:
           name: artifacts
-          path: build/dev-tasks-${{ env.APP_VERSION }}.dmg
+          path: build/dev-tasks-*.dmg
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
         with:
           name: artifacts
-          path: build/dev-tasks-${{ env.APP_VERSION }}.deb
+          path: build/dev-tasks-*.deb
 
       - name: Upload Win artifacts
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'windows')
         with:
           name: artifacts
-          path: build/dev-tasks-${{ env.APP_VERSION }}.exe
+          path: build/dev-tasks-*.exe
 
   assets:
     needs: build
