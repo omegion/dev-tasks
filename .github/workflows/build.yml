@@ -47,21 +47,21 @@ jobs:
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'macOS')
         with:
-          name: artifacts
+          name: mac-dmg
           path: build/dev-tasks-*.dmg
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
         with:
-          name: artifacts
+          name: linux
           path: build/dev-tasks-*.deb
 
       - name: Upload Win artifacts
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'windows')
         with:
-          name: artifacts
+          name: win
           path: build/dev-tasks-*.exe
 
   assets:
@@ -74,7 +74,7 @@ jobs:
       - name: Dowload Artifacts
         uses: actions/download-artifact@v2
         with:
-          name: artifacts
+          path: artifacts
 
       - name: Release
         uses: softprops/action-gh-release@v1
