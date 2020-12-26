@@ -1,0 +1,74 @@
+name: Build Dev Tasks
+
+on:
+  create:
+    tags:
+      - v*
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ windows-latest ]
+
+    steps:
+      - name: Context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Hardcode tag to file
+        run: (node -p "require('./package.json').version") > APP_VERSION
+
+      - name: Set Version ENV
+        run: echo "APP_VERSION=$(cat APP_VERSION)" >> $env:GITHUB_ENV
+
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: yarn install
+        run: |
+          yarn install
+
+      - name: Publish
+        run: |
+          yarn run build
+
+      - name: Upload Mac artifacts
+        uses: actions/upload-artifact@v1
+        if: startsWith(matrix.os, 'macOS')
+        with:
+          name: mac-dmg
+          path: build/dev-tasks-${{ env.APP_VERSION }}.dmg
+
+      - name: Upload Linux artifacts
+        uses: actions/upload-artifact@v1
+        if: startsWith(matrix.os, 'ubuntu')
+        with:
+          name: linux
+          path: build/dev-tasks-${{ env.APP_VERSION }}.AppImage
+
+      - name: Upload Win artifacts
+        uses: actions/upload-artifact@v1
+        if: startsWith(matrix.os, 'windows')
+        with:
+          name: win
+          path: build/dev-tasks-${{ env.APP_VERSION }}.exe
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: Release ${{ github.ref }}
+          files: build/dev-tasks-${{ env.APP_VERSION }}.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

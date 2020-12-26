@@ -1,0 +1,119 @@
+@import "codemirror/lib/codemirror.css";
+
+$max-width: 40em;
+
+.codex-editor {
+  max-width: $max-width;
+
+  .ce-block {
+    max-width: $max-width - 1em;
+
+    .ce-block__content {
+      max-width: unset;
+
+      h1 {
+        font-size: $size-1;
+        font-weight: bold;
+        color: $black;
+      }
+
+      h2 {
+        font-size: $size-2;
+        font-weight: bold;
+        color: $black;
+      }
+
+      h3 {
+        font-size: $size-3;
+        font-weight: bold;
+        color: $black;
+      }
+
+      h4 {
+        font-size: $size-4;
+        font-weight: bold;
+        color: $black;
+      }
+
+      h5 {
+        font-size: $size-5;
+        font-weight: bold;
+        color: $black;
+      }
+
+      h6 {
+        font-size: $size-6;
+        font-weight: bold;
+        color: $black;
+      }
+
+      .ce-header {
+        padding: 0.6em 0 1em;
+      }
+
+      .cdx-codemirror {
+        span {
+          &.select {
+            position: absolute;
+            top: 14px;
+            right: 7px;
+            z-index: 1;
+          }
+        }
+
+        .CodeMirror {
+          height: 100%;
+          background-color: $white-ter;
+          border-radius: $radius;
+          border: 1px solid $border;
+          font-size: 13px;
+          font-family: monospace;
+          z-index: 0;
+
+          pre {
+            font-family: monospace;
+          }
+        }
+      }
+
+      .cdx-checklist {
+        &__item {
+          &--checked {
+            .cdx-checklist__item-checkbox {
+              background: $secondary;
+              border-color: $secondary;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ce-toolbar__content {
+    max-width: unset;
+  }
+
+  .icon {
+    height: unset;
+    width: unset;
+  }
+
+  .ce-toolbar__settings-btn {
+    width: unset;
+    height: 28px;
+    background: transparent;
+
+    .icon {
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  .ce-inline-tool {
+    color: $black-light;
+  }
+
+  .ce-toolbar__actions {
+    right: -5px;
+  }
+}
