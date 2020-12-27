@@ -1,7 +1,7 @@
 {
   "name": "dev-tasks",
   "version": "0.0.1",
-  "description": "An Developer tool project",
+  "description": "An Developer Task Management Tool",
   "main": "./dist/main/index.js",
   "scripts": {
     "dev": "node .electron-nuxt/dev.js",
