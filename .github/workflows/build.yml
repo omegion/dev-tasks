@@ -1,9 +1,9 @@
 name: Build Dev Tasks
 
 on:
-  push:
-    branches:
-      - master
+  #  push:
+  #    branches:
+  #      - master
   create:
     tags:
       - v*
@@ -64,6 +64,7 @@ jobs:
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
         with:
+          name: linux
           path: build/dev-tasks-*.deb
 
       - name: Upload Win artifacts
@@ -88,12 +89,12 @@ jobs:
         run: |
           cd artifacts
           ls -la
-#
-#      - name: Release
-#        uses: softprops/action-gh-release@v1
-#        if: startsWith(github.ref, 'refs/tags/')
-#        with:
-#          name: Release ${{ github.ref }}
-#          files: artifacts/*
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: Release ${{ github.ref }}
+          files: artifacts/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
