@@ -1,9 +1,9 @@
 name: Build Dev Tasks
 
 on:
-  #  push:
-  #    branches:
-  #      - master
+  push:
+    branches:
+      - master
   create:
     tags:
       - v*
@@ -15,7 +15,8 @@ jobs:
 
     strategy:
       matrix:
-        os: [ macOS-latest, ubuntu-latest, windows-latest ]
+        os: [ ubuntu-latest ]
+    #        os: [ macOS-latest, ubuntu-latest, windows-latest ]
 
     steps:
       - name: Context
@@ -33,18 +34,25 @@ jobs:
       - name: Set Version ENV
         run: echo "APP_VERSION=$(cat APP_VERSION)" >> $env:GITHUB_ENV
 
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-
-      - name: yarn install
+      - name: Create Files
         run: |
-          yarn install
+          mkdir builds
+          echo "mac" > build/dev-tasks-v${{ APP_VERSION }}.dmg
+          echo "win" > build/dev-tasks-v${{ APP_VERSION }}.exe
+          echo "linux" > build/dev-tasks-v${{ APP_VERSION }}.deb
 
-      - name: Publish
-        run: |
-          yarn run build
+      #      - name: Use Node.js 12.x
+      #        uses: actions/setup-node@v1
+      #        with:
+      #          node-version: 12.x
+      #
+      #      - name: yarn install
+      #        run: |
+      #          yarn install
+      #
+      #      - name: Build
+      #        run: |
+      #          yarn run build
 
       - name: Upload Mac artifacts
         uses: actions/upload-artifact@v2
@@ -77,6 +85,10 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: artifacts
+
+      - name: check Files
+        run: |
+          ls -d **/*
 
       - name: Release
         uses: softprops/action-gh-release@v1
