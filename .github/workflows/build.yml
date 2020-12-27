@@ -64,7 +64,6 @@ jobs:
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
         with:
-          name: linux
           path: build/dev-tasks-*.deb
 
       - name: Upload Win artifacts
