@@ -1,9 +1,9 @@
 name: Build Dev Tasks
 
 on:
-  #  push:
-  #    branches:
-  #      - master
+  push:
+    branches:
+      - master
   create:
     tags:
       - v*
@@ -88,6 +88,8 @@ jobs:
       - name: check artifacts
         run: |
           cd artifacts
+          ls -la
+          cd linux
           ls -la
 
       - name: Release
