@@ -1,9 +1,9 @@
 name: Build Dev Tasks
 
 on:
-  push:
-    branches:
-      - master
+  #  push:
+  #    branches:
+  #      - master
   create:
     tags:
       - v*
@@ -97,6 +97,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           name: Release ${{ github.ref }}
-          files: artifacts/*
+          files: |
+            artifacts/linux/*.deb
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
