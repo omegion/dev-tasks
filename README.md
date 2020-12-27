@@ -1,6 +1,6 @@
-# massCode
+# Dev Tools
 
-A free and open source code snippets manager for developers.
+A free and open source task management tool for developers.
 
 <p align="center">
   <img src="./src/renderer/assets/logo.png" width="80">
@@ -20,7 +20,7 @@ A free and open source code snippets manager for developers.
 **Dev Tasks** is open source project and completely free to use.
 
 However, the amount of effort needed to maintain and develop new features for the project is not sustainable without
-proper financial backing. You can support massCode development via the following methods:
+proper financial backing. You can support Dev Tasks development via the following methods:
 
 SOON
 
