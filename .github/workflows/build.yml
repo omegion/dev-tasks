@@ -1,9 +1,6 @@
 name: Build Dev Tasks
 
 on:
-  #  push:
-  #    branches:
-  #      - master
   create:
     tags:
       - v*
@@ -15,8 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
-    #        os: [ macOS-latest, ubuntu-latest, windows-latest ]
+        os: [ macOS-latest, ubuntu-latest, windows-latest ]
 
     steps:
       - name: Context
