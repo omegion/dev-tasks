@@ -37,9 +37,9 @@ jobs:
       - name: Create Files
         run: |
           mkdir builds
-          echo "mac" > build/dev-tasks-v${{ env:APP_VERSION }}.dmg
-          echo "win" > build/dev-tasks-v${{ env:APP_VERSION }}.exe
-          echo "linux" > build/dev-tasks-v${{ env:APP_VERSION }}.deb
+          echo "mac" > build/dev-tasks-v${{ env.APP_VERSION }}.dmg
+          echo "win" > build/dev-tasks-v${{ env.APP_VERSION }}.exe
+          echo "linux" > build/dev-tasks-v${{ env.APP_VERSION }}.deb
 
       #      - name: Use Node.js 12.x
       #        uses: actions/setup-node@v1
