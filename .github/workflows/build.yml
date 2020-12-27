@@ -33,46 +33,39 @@ jobs:
       - name: Set Version ENV
         run: echo "APP_VERSION=$(cat APP_VERSION)" >> $env:GITHUB_ENV
 
-      - name: Create Files
-        run: |
-          mkdir builds
-          echo "mac" > build/dev-tasks-v0.0.1.dmg
-          echo "win" > build/dev-tasks-v0.0.1.exe
-          echo "linux" > build/dev-tasks-v0.0.1.deb
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
 
-      #      - name: Use Node.js 12.x
-      #        uses: actions/setup-node@v1
-      #        with:
-      #          node-version: 12.x
-      #
-      #      - name: yarn install
-      #        run: |
-      #          yarn install
-      #
-      #      - name: Publish
-      #        run: |
-      #          yarn run build
+      - name: yarn install
+        run: |
+          yarn install
+
+      - name: Publish
+        run: |
+          yarn run build
 
       - name: Upload Mac artifacts
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'macOS')
         with:
           name: mac-dmg
-          path: build/dev-tasks-*.dmg
+          path: build/*.dmg
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
         with:
           name: linux
-          path: build/dev-tasks-*.deb
+          path: build/*.deb
 
       - name: Upload Win artifacts
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'windows')
         with:
           name: win
-          path: build/dev-tasks-*.exe
+          path: build/*.exe
 
   assets:
     needs: build
@@ -84,13 +77,6 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: artifacts
-
-      - name: check artifacts
-        run: |
-          cd artifacts
-          ls -la
-          cd linux
-          ls -la
 
       - name: Release
         uses: softprops/action-gh-release@v1
