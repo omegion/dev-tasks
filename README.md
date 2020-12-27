@@ -1,30 +1,50 @@
-# dev-tools
+# massCode
 
-> An Developer tool project
+A free and open source code snippets manager for developers.
 
-#### Build Setup
+<p align="center">
+  <img src="./src/renderer/assets/logo.png" width="80">
+</p>
+<p align="center">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/omegion/dev-tasks/Build Dev Tasks">
+  <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/omegion/dev-tasks">
+  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/omegion/dev-tasks/total">
+  <img alt="GitHub" src="https://img.shields.io/github/license/omegion/dev-tasks">
+</p>
+<p align="center">
+  <strong>Built with Electron and Vue.</strong>
+</p>
 
-``` bash
+## Supporting
+
+**Dev Tasks** is open source project and completely free to use.
+
+However, the amount of effort needed to maintain and develop new features for the project is not sustainable without
+proper financial backing. You can support massCode development via the following methods:
+
+SOON
+
+## Overview
+
+SOON
+
+## Development
+
+```bash
 # install dependencies
-yarn install
-
-# serve app with hot reload
+yarn
+# serve with hot reload
 yarn run dev
+```
 
-# build electron application for production
+## Building
+
+```bash
+## build application for production
 yarn run build
-
-
-# lint all JS/Vue component files in `src/`
-yarn run lint
-
 ```
 
----
+## License
 
-Generate Icons
+[AGPL-3.0](https://github.com/omegion/dev-tasks/blob/master/LICENSE)
 
-```
-
-electron-icon-builder --input=.\src\renderer\assets\logo.png --output .\build\ --flatten
-```
