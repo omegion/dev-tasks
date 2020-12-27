@@ -84,7 +84,9 @@ jobs:
       - uses: actions/download-artifact@v2
 
       - name: check artifacts
-        run: ls -la
+        run: |
+          cd build
+          ls -la
 #
 #      - name: Release
 #        uses: softprops/action-gh-release@v1
