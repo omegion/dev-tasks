@@ -30,18 +30,24 @@ jobs:
       - name: Set Version ENV
         run: echo "APP_VERSION=$(cat APP_VERSION)" >> $env:GITHUB_ENV
 
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-
-      - name: yarn install
+      - name: Create Files
         run: |
-          yarn install
+          echo "mac" > builds/dev-tasks-v0.0.1.dmg
+          echo "win" > builds/dev-tasks-v0.0.1.exe
+          echo "linux" > builds/dev-tasks-v0.0.1.deb
 
-      - name: Publish
-        run: |
-          yarn run build
+      #      - name: Use Node.js 12.x
+      #        uses: actions/setup-node@v1
+      #        with:
+      #          node-version: 12.x
+      #
+      #      - name: yarn install
+      #        run: |
+      #          yarn install
+      #
+      #      - name: Publish
+      #        run: |
+      #          yarn run build
 
       - name: Upload Mac artifacts
         uses: actions/upload-artifact@v2
@@ -71,16 +77,16 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Dowload Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          path: artifacts
+      - uses: actions/download-artifact@v2
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          name: Release ${{ github.ref }}
-          files: artifacts/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: check artifacts
+        run: ls -la
+#
+#      - name: Release
+#        uses: softprops/action-gh-release@v1
+#        if: startsWith(github.ref, 'refs/tags/')
+#        with:
+#          name: Release ${{ github.ref }}
+#          files: artifacts/*
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
