@@ -206,41 +206,6 @@ body.has-navbar-fixed-top {
   }
 }
 
-.ql {
-  .ql-toolbar {
-    border-radius: 4px 4px 0px 0px !important;
-    border: 1px solid #dfe1e6 !important;
-    border-bottom: none !important;
-  }
-
-  .ql-container.ql-snow {
-    color: #172b4d;
-    font-size: 15px;
-    border-radius: 0px 0px 4px 4px;
-    border: 1px solid #dfe1e6;
-    border-top: none;
-  }
-}
-
-.ql-editor {
-  // min-height: 110px;
-  font-family: "Circular Std", sans-serif;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: bold;
-  }
-
-  img,
-  video {
-    display: inline-block;
-  }
-}
-
 .content {
   padding: 0 !important;
   font-size: 15px;

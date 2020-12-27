@@ -17,46 +17,46 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
+import { defineComponent } from '@nuxtjs/composition-api'
 import {
   DialogProgrammatic as Dialog,
-  SnackbarProgrammatic as Snackbar,
-} from "buefy";
-import ContextMenuComp from "~/components/shared/ContextMenu/ContextMenu.vue";
-import Edit from "~/components/Repository/Edit.vue";
-import Repository from "~/models/Repository.ts";
-import PullRequest from "~/models/PullRequest.ts";
+  SnackbarProgrammatic as Snackbar
+} from 'buefy'
+import ContextMenuComp from '~/components/shared/ContextMenu/ContextMenu.vue'
+import Edit from '~/components/Repository/Edit.vue'
+import Repository from '~/models/Repository.ts'
+import PullRequest from '~/models/PullRequest.ts'
 
 export default defineComponent({
-  name: "ContextMenu",
+  name: 'ContextMenu',
   components: { ContextMenuComp, Edit },
   props: {
     repository: {
       type: Repository,
-      required: true,
-    },
+      required: true
+    }
   },
-  setup(props, { root }) {
+  setup (props, { root }) {
     const deleteRepositoryConfirm = () => {
       Dialog.confirm({
-        title: "Delete Repository",
+        title: 'Delete Repository',
         message: `You're about to delete <strong>${props.repository.name}</strong>. This cannot be undone.`,
-        confirmText: "Delete",
-        type: "is-danger",
-        onConfirm: () => deleteRepository(),
-      });
-    };
+        confirmText: 'Delete',
+        type: 'is-danger',
+        onConfirm: () => deleteRepository()
+      })
+    }
 
     const deleteRepository = async () => {
       await PullRequest.delete(
-        (pull) => pull.repository_id === props.repository.id
-      );
+        pull => pull.repository_id === props.repository.id
+      )
       await Repository.delete(props.repository.$id).then(() => {
-        Snackbar.open("Repository deleted.");
-      });
-    };
+        Snackbar.open('Repository deleted.')
+      })
+    }
 
-    return { deleteRepositoryConfirm };
-  },
-});
+    return { deleteRepositoryConfirm }
+  }
+})
 </script>

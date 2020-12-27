@@ -10,14 +10,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
-import List from "~/components/Repository/List/List.vue";
+import { defineComponent } from '@nuxtjs/composition-api'
+import List from '~/components/Repository/List/List.vue'
 
 export default defineComponent({
-  name: "Index",
-  components: { List },
-  setup(props, { root }) {
-    return {};
-  },
-});
+  name: 'Index',
+  components: { List }
+})
 </script>
+<style>
+.editor {
+  width: 600px;
+  height: 400px;
+}
+</style>

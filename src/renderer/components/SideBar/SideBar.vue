@@ -5,7 +5,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-48x48">
-              <img :src="require('~/assets/logo.svg')" alt="Dev Tasks" />
+              <img :src="require('~/assets/logo.svg')" alt="Dev Tasks">
             </figure>
           </div>
           <div
@@ -51,55 +51,55 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "@nuxtjs/composition-api";
+import { computed, defineComponent } from '@nuxtjs/composition-api'
 
-import Setting from "~/models/Setting";
-import ProjectMenuList from "~/components/SideBar/ProjectMenuList.vue";
-import SettingSidebar from "~/components/Setting/Setting.vue";
+import Setting from '~/models/Setting'
+import ProjectMenuList from '~/components/SideBar/ProjectMenuList.vue'
+import SettingSidebar from '~/components/Setting/Setting.vue'
 
 export default defineComponent({
-  name: "SideBar",
+  name: 'SideBar',
   components: { ProjectMenuList, SettingSidebar },
-  setup() {
+  setup () {
     const sidebarMini = computed(() => {
-      return Setting.query().where("name", "sidebar_mini").first();
-    });
+      return Setting.query().where('name', 'sidebar_mini').first()
+    })
 
     const toggleIcon = computed(() => {
-      if (sidebarMini.value === null || sidebarMini.value.value === "false") {
-        return "arrow-collapse-right";
+      if (sidebarMini.value === null || sidebarMini.value.value === 'false') {
+        return 'arrow-collapse-right'
       }
-      return "arrow-collapse-left";
-    });
+      return 'arrow-collapse-left'
+    })
 
     const isReduced = computed(() => {
-      return sidebarMini.value === null || sidebarMini.value.value === "false";
-    });
+      return sidebarMini.value === null || sidebarMini.value.value === 'false'
+    })
 
     const toggle = () => {
       const data = {
-        name: "sidebar_mini",
-        value: true,
-      };
+        name: 'sidebar_mini',
+        value: true
+      }
       if (sidebarMini.value === null) {
         Setting.insert({
-          data,
-        });
-      } else if (sidebarMini.value.value === "false") {
+          data
+        })
+      } else if (sidebarMini.value.value === 'false') {
         Setting.update({
-          data,
-        });
+          data
+        })
       } else {
-        data.value = false;
+        data.value = false
         Setting.update({
-          data,
-        });
+          data
+        })
       }
-    };
+    }
 
-    return { sidebarMini, toggleIcon, isReduced, toggle };
-  },
-});
+    return { sidebarMini, toggleIcon, isReduced, toggle }
+  }
+})
 </script>
 
 <style lang="scss">

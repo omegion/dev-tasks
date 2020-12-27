@@ -1,9 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-import { app, Menu, MenuItem } from 'electron'
+import { app, Menu } from 'electron'
 import electronDebug from 'electron-debug'
 import vueDevtools from 'vue-devtools'
-import { ELECTRON_RELAUNCH_CODE } from '../../.electron-nuxt/config'
 import mainWinHandler from './mainWindow'
 import MainMenu from './lib/menu'
 
@@ -31,22 +30,9 @@ if (process.platform === 'win32') {
 
 app.on('ready', () => {
   vueDevtools.install()
-
   const mainMenu = MainMenu(mainWinHandler.browserWindow)
-
-  const holder = Menu.buildFromTemplate(mainMenu)
-
-  // const menu = Menu.getApplicationMenu();
-  const refreshButton = new MenuItem({
-    label: 'Relaunch electron',
-    accelerator: 'CommandOrControl+E',
-    click: () => {
-      app.exit(ELECTRON_RELAUNCH_CODE)
-    }
-  })
-
-  holder.append(refreshButton)
-  Menu.setApplicationMenu(holder)
+  const menu = Menu.buildFromTemplate(mainMenu)
+  Menu.setApplicationMenu(menu)
 })
 
 mainWinHandler.onCreated(browserWindow => {

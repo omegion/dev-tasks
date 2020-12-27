@@ -31,21 +31,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
-import Repository from "~/models/Repository.ts";
-import ContextMenu from "~/components/Repository/List/ContextMenu.vue";
+import { defineComponent } from '@nuxtjs/composition-api'
+import Repository from '~/models/Repository.ts'
+import ContextMenu from '~/components/Repository/List/ContextMenu.vue'
 
 export default defineComponent({
-  name: "Item",
+  name: 'Item',
   components: { ContextMenu },
   props: {
     repository: {
       type: Repository,
-      required: true,
-    },
+      required: true
+    }
   },
-  setup(props, { root }) {
-    return {};
-  },
-});
+  setup (props, { root }) {
+    return {}
+  }
+})
 </script>

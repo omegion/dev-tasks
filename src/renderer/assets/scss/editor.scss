@@ -1,5 +1,7 @@
 @import "codemirror/lib/codemirror.css";
 
+@import "~/plugins/editor/alert/index.scss";
+
 $max-width: 40em;
 
 .codex-editor {
@@ -115,5 +117,29 @@ $max-width: 40em;
 
   .ce-toolbar__actions {
     right: -5px;
+  }
+}
+
+// Tooltip
+.ct {
+  border-radius: $radius;
+  box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, 0.2);
+
+  &::before {
+    border-radius: $radius;
+    background-color: $white;
+    -webkit-mask-box-image: unset;
+  }
+
+  &::after {
+    background-color: $white;
+  }
+
+  .ct__content {
+    width: auto;
+    color: $text;
+    font-size: 0.85rem;
+    font-weight: 400;
+    padding: 0.35rem 0.75rem;
   }
 }

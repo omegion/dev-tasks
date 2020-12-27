@@ -31,41 +31,41 @@ import {
   computed,
   defineComponent,
   ref,
-  useContext,
-} from "@nuxtjs/composition-api";
-import ListItem from "~/components/Repository/List/Item.vue";
-import ListFooter from "~/components/Repository/List/Footer/Footer.vue";
-import ListHeader from "~/components/Repository/List/Header/Header.vue";
-import Repository from "~/models/Repository.ts";
+  useContext
+} from '@nuxtjs/composition-api'
+import ListItem from '~/components/Repository/List/Item.vue'
+import ListFooter from '~/components/Repository/List/Footer/Footer.vue'
+import ListHeader from '~/components/Repository/List/Header/Header.vue'
+import Repository from '~/models/Repository.ts'
 
 export default defineComponent({
-  name: "NavBar",
+  name: 'NavBar',
   components: {
     ListItem,
     ListFooter,
-    ListHeader,
+    ListHeader
   },
-  setup(props, { root }) {
-    const keyword = ref(null);
-    const tags = ref([]);
+  setup (props, { root }) {
+    const keyword = ref(null)
+    const tags = ref([])
 
-    const { params } = useContext();
+    const { params } = useContext()
 
     const repositories = computed(() => {
-      let repositories = Repository.query();
+      let repositories = Repository.query()
 
-      if (keyword.value != null && keyword.value !== "") {
-        repositories = repositories.search(keyword.value);
+      if (keyword.value != null && keyword.value !== '') {
+        repositories = repositories.search(keyword.value)
       }
 
-      return repositories.orderBy("name", "desc").get();
-    });
+      return repositories.orderBy('name', 'desc').get()
+    })
 
     const routeTaskId = () => {
-      return root.$route.params.task_id;
-    };
+      return root.$route.params.task_id
+    }
 
-    return { keyword, tags, routeTaskId, repositories, params };
-  },
-});
+    return { keyword, tags, routeTaskId, repositories, params }
+  }
+})
 </script>

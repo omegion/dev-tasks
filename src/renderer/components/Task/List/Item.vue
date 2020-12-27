@@ -44,34 +44,34 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "@nuxtjs/composition-api";
-import ContextMenu from "~/components/Task/List/ContextMenu.vue";
-import Task from "~/models/Task";
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+import ContextMenu from '~/components/Task/List/ContextMenu.vue'
+import Task from '~/models/Task'
 
 export default defineComponent({
-  name: "TaskListItem",
+  name: 'TaskListItem',
   components: { ContextMenu },
   props: {
     task: {
       type: Task,
-      required: true,
-    },
+      required: true
+    }
   },
-  setup(props, { root }) {
+  setup (props, { root }) {
     const currentStatus = computed(() =>
-      Task.statusList().find((s) => s.slug === props.task.status)
-    );
+      Task.statusList().find(s => s.slug === props.task.status)
+    )
     const currentPriority = computed(() =>
-      Task.priorityList().find((s) => s.value === props.task.priority)
-    );
+      Task.priorityList().find(s => s.value === props.task.priority)
+    )
     const hasDependency = computed(
       () =>
         Task.query()
-          .where("id", props.task.id)
-          .has("dependencies", ">", 0)
+          .where('id', props.task.id)
+          .has('dependencies', '>', 0)
           .count() > 0
-    );
-    return { currentStatus, currentPriority, hasDependency };
-  },
-});
+    )
+    return { currentStatus, currentPriority, hasDependency }
+  }
+})
 </script>

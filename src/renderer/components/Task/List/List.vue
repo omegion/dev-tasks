@@ -31,50 +31,50 @@ import {
   computed,
   defineComponent,
   ref,
-  useContext,
-} from "@nuxtjs/composition-api";
-import Task from "~/models/Task";
-import TaskListItem from "~/components/Task/List/Item.vue";
-import TaskListHeader from "~/components/Task/List/Header/Header.vue";
-import TaskListFooter from "~/components/Task/List/Footer/Footer.vue";
+  useContext
+} from '@nuxtjs/composition-api'
+import Task from '~/models/Task'
+import TaskListItem from '~/components/Task/List/Item.vue'
+import TaskListHeader from '~/components/Task/List/Header/Header.vue'
+import TaskListFooter from '~/components/Task/List/Footer/Footer.vue'
 
 export default defineComponent({
-  name: "List",
+  name: 'List',
   components: {
     TaskListItem,
     TaskListHeader,
-    TaskListFooter,
+    TaskListFooter
   },
-  setup(props, { root }) {
-    const keyword = ref(null);
-    const tags = ref([]);
+  setup (props, { root }) {
+    const keyword = ref(null)
+    const tags = ref([])
 
-    const { params } = useContext();
+    const { params } = useContext()
 
     const tasks = computed(() => {
-      let tasks = Task.query().where("project_id", params.value.project_id);
+      let tasks = Task.query().where('project_id', params.value.project_id)
 
-      if (keyword.value != null && keyword.value !== "") {
-        tasks = tasks.search(keyword.value);
+      if (keyword.value != null && keyword.value !== '') {
+        tasks = tasks.search(keyword.value)
       }
 
       if (tags.value.length > 0) {
-        tasks = tasks.whereHas("tags", (query) => {
-          query.whereIdIn(tags.value);
-        });
+        tasks = tasks.whereHas('tags', query => {
+          query.whereIdIn(tags.value)
+        })
       }
 
       return tasks
-        .orderBy("priority", "desc")
-        .orderBy("updatedAt", "desc")
-        .get();
-    });
+        .orderBy('priority', 'desc')
+        .orderBy('updatedAt', 'desc')
+        .get()
+    })
 
     const routeTaskId = () => {
-      return root.$route.params.task_id;
-    };
+      return root.$route.params.task_id
+    }
 
-    return { keyword, tags, routeTaskId, tasks, params };
-  },
-});
+    return { keyword, tags, routeTaskId, tasks, params }
+  }
+})
 </script>
