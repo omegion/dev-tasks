@@ -1,9 +1,9 @@
 name: Build Dev Tasks
 
 on:
-  push:
-    branches:
-      - master
+  #  push:
+  #    branches:
+  #      - master
   create:
     tags:
       - v*
@@ -28,31 +28,18 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Hardcode tag to file
-        run: (node -p "require('./package.json').version") > APP_VERSION
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
 
-      - name: Set Version ENV
-        run: echo "APP_VERSION=$(cat APP_VERSION)" >> $GITHUB_ENV
-
-      - name: Create Files
+      - name: yarn install
         run: |
-          mkdir builds
-          echo "mac" > build/dev-tasks-v${APP_VERSION}.dmg
-          echo "win" > build/dev-tasks-v${APP_VERSION}.exe
-          echo "linux" > build/dev-tasks-v${APP_VERSION}.deb
+          yarn install
 
-      #      - name: Use Node.js 12.x
-      #        uses: actions/setup-node@v1
-      #        with:
-      #          node-version: 12.x
-      #
-      #      - name: yarn install
-      #        run: |
-      #          yarn install
-      #
-      #      - name: Build
-      #        run: |
-      #          yarn run build
+      - name: Build
+        run: |
+          yarn run build
 
       - name: Upload Mac artifacts
         uses: actions/upload-artifact@v2
@@ -82,20 +69,21 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Hardcode tag to file
+        run: (node -p "require('./package.json').version") > APP_VERSION
+
+      - name: Set Version ENV
+        run: echo "APP_VERSION=$(cat APP_VERSION)" >> $GITHUB_ENV
+
       - uses: actions/download-artifact@v2
         with:
           path: artifacts
-
-      - name: check Files
-        run: |
-          cd artifacts/linux
-          ls -la
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: Release ${{ github.ref }}
+          name: Release ${APP_VERSION}
           files: |
             artifacts/**/*
         env:
