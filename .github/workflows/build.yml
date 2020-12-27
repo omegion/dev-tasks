@@ -98,6 +98,6 @@ jobs:
         with:
           name: Release ${{ github.ref }}
           files: |
-            artifacts/linux/*.deb
+            artifacts/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
