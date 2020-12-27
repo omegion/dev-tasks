@@ -1,6 +1,9 @@
 name: Build Dev Tasks
 
 on:
+  push:
+    branches:
+      - master
   create:
     tags:
       - v*
@@ -32,6 +35,7 @@ jobs:
 
       - name: Create Files
         run: |
+          mkdir builds
           echo "mac" > builds/dev-tasks-v0.0.1.dmg
           echo "win" > builds/dev-tasks-v0.0.1.exe
           echo "linux" > builds/dev-tasks-v0.0.1.deb
