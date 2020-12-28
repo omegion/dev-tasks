@@ -4,6 +4,7 @@ build/*
 !build/icons
 node_modules
 .idea
+test
 
 # PouchDB
 *.db

@@ -1,10 +1,9 @@
 import fs from 'fs'
 import path from 'path'
-import { app, Menu } from 'electron'
+import { app } from 'electron'
 import electronDebug from 'electron-debug'
 import vueDevtools from 'vue-devtools'
 import mainWinHandler from './mainWindow'
-import MainMenu from './lib/menu'
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
@@ -30,9 +29,6 @@ if (process.platform === 'win32') {
 
 app.on('ready', () => {
   vueDevtools.install()
-  const mainMenu = MainMenu(mainWinHandler.browserWindow)
-  const menu = Menu.buildFromTemplate(mainMenu)
-  Menu.setApplicationMenu(menu)
 })
 
 mainWinHandler.onCreated(browserWindow => {

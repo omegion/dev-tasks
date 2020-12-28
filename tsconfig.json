@@ -1,14 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "~/*": [
-        "./src/renderer/*"
-      ],
-      "@/*": [
-        "./src/renderer/*"
-      ]
-    }
+    "sourceMap": true,
+    "baseUrl": "."
   },
   "allowSyntheticDefaultImports": true
 }

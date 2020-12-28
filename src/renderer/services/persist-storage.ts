@@ -9,8 +9,8 @@ export default class PersistStore {
   constructor() {
     const isWin = platform() === "win32";
     this.defaultPath = isWin
-      ? homedir() + "\\devTools"
-      : homedir() + "/devTools";
+      ? homedir() + "\\devTasks"
+      : homedir() + "/devTasks";
 
     this.makeDirectory();
   }

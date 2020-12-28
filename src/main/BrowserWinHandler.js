@@ -40,7 +40,13 @@ export default class BrowserWinHandler {
         devTools: !process.env.SPECTRON // disable on e2e test environment
       }
     })
-    this.browserWindow.on('closed', () => {
+
+    this.browserWindow.on('close', evt => {
+      evt.preventDefault()
+      this.browserWindow.hide()
+    })
+
+    this.browserWindow.on('closed', evt => {
       // Dereference the window object
       this.browserWindow = null
     })

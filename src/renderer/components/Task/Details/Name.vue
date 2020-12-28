@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-click-outside="closeCloseAndSaveInput">
     <b-input
       v-show="showNameInput"
       ref="nameInputRef"
@@ -56,12 +56,17 @@ export default defineComponent({
       showNameInput.value = !showNameInput.value
     }
 
+    const closeCloseAndSaveInput = () => {
+      showNameInput.value = false
+    }
+
     return {
       nameInputRef,
       name,
       showNameInput,
       save,
-      toggleInput
+      toggleInput,
+      closeCloseAndSaveInput
     }
   }
 })

@@ -35,6 +35,16 @@ export default function MainMenu (browserWindow) {
           click () {
             browserWindow.webContents.send('menu:new-repository')
           }
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: 'Quit',
+          accelerator: 'CmdOrCtrl+Q',
+          click () {
+            app.quit()
+          }
         }
       ]
     },
@@ -137,7 +147,7 @@ export default function MainMenu (browserWindow) {
         {
           label: 'Report Issue',
           click () {
-            shell.openExternal(`${GITHUB_REPOSITORY}/issues/new`)
+            shell.openExternal(`${GITHUB_REPOSITORY}/issues/new/choose`)
           }
         },
         {
