@@ -8,6 +8,7 @@ import { resolve } from "path";
 import MainWindow from "./services/MainWindow";
 import Tray from "./services/Tray";
 import MainMenu from "./services/Menu";
+import Platform from "./services/Platform";
 
 function loadContent(port = 3000) {
   // Main window
@@ -27,6 +28,11 @@ function loadContent(port = 3000) {
   // Tray
   const tray = new Tray(win.browserWindow, port);
   tray.create();
+
+  // Dock
+  if (Platform.get() === "macOS") {
+    app.dock.hide()
+  }
 }
 
 app.on("ready", async () => {
@@ -55,3 +61,4 @@ app.on("ready", async () => {
     server.listen(port, "localhost", () => loadContent(port));
   }
 });
+

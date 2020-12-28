@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, Menu, Tray as ETray } from "electron";
 import path from "path";
+import Platform from "./Platform";
 
 const positioner = require("electron-traywindow-positioner");
 
@@ -17,7 +18,7 @@ export default class Tray {
   }
 
   create() {
-    this.tray = new ETray(path.join(__dirname, "../assets/dev-tasks.png"));
+    this.tray = new ETray(this.getTrayIconPath());
 
     this.tray.on("click", event => {
       event.preventDefault();
@@ -90,5 +91,13 @@ export default class Tray {
 
     this.browserWindow.setBounds(points);
     this.browserWindow.show();
+  }
+
+  getTrayIconPath() {
+    const platform = Platform.get()
+    if (platform === "macOS") {
+      return path.join(__dirname, "../assets/tray-icon@16x16.png")
+    }
+    return path.join(__dirname, "../assets/tray-icon@400x400.png")
   }
 }
