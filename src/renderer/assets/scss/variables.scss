@@ -1,0 +1,37 @@
+// Sidebar
+$sidebar-width: 14rem;
+$sidebar-medium-width: 30vw;
+$sidebar-large-width: 40vw;
+$sidebar-xlarge-width: 60vw;
+$sidebar-mobile-width: 4.5em;
+$sidebar-box-shadow: 0.0625rem 0 0 0 rgba($black, 0.1);
+
+// Navbar
+$navbar-box-shadow-size: 0 0.0625rem 0 0;
+$navbar-box-shadow-color: rgba($black, 0.1);
+
+// Table
+$table-row-active-color: $text;
+$table-row-active-background-color: $white-ter;
+
+// Typography
+$family-sans-serif: "Circular Std", sans-serif;
+$family-primary: $family-sans-serif;
+$family-secondary: "Circular Std", sans-serif;
+
+$size-1: 3rem;
+$size-2: 2.5rem;
+$size-3: 2rem;
+$size-4: 1.5rem;
+$size-5: 1.25rem;
+$size-6: 0.875rem;
+$size-7: 2.8125rem;
+
+// Form
+$label-color: $black;
+$label-weight: $weight-normal;
+
+// Custom
+$task-list-header-height: 4.2em;
+$task-list-footer-height: 4.2em;
+$task-node-item-width: 9em;

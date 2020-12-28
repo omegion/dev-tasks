@@ -1,0 +1,486 @@
+html {
+  background-color: transparent;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: $white;
+
+  &.is-transparent {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.main-wrap {
+  padding-left: $sidebar-width;
+
+  &.sidebar-mini {
+    padding-left: $sidebar-mobile-width;
+  }
+
+  .inner-wrap {
+    margin: 0;
+    height: 100vh;
+
+    .is-inner-left {
+      padding: 0;
+
+      .task-list-header,
+      .repository-list-header {
+        //height: $task-list-header-height;
+        border-bottom: 1px solid rgba($black, 0.1);
+      }
+
+      .task-list,
+      .repository-list {
+        height: calc(
+          100vh - #{($task-list-header-height + $task-list-footer-height)}
+        );
+        overflow-y: auto;
+      }
+
+      .task-list-footer,
+      .repository-list-footer {
+        height: $task-list-footer-height;
+        border-top: 1px solid rgba($black, 0.1);
+      }
+
+      .list-title {
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .table {
+        border: 0;
+
+        thead {
+          display: none;
+        }
+
+        td {
+          height: 4.5em;
+          padding: 0;
+
+          .is-nuxt-link-exact-active {
+            background-color: $white-ter;
+          }
+        }
+
+        tr {
+          cursor: pointer;
+
+          &.is-selected td,
+          &.is-selected tr {
+            border-color: $border;
+          }
+        }
+      }
+    }
+
+    .is-inner-right {
+      overflow-y: auto;
+      padding: 1.5em 2em;
+    }
+  }
+}
+
+.b-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  height: 100vh;
+
+  &.is-medium {
+    .sidebar-content {
+      width: $sidebar-medium-width;
+    }
+  }
+
+  &.is-large {
+    .sidebar-content {
+      width: $sidebar-large-width;
+    }
+  }
+
+  &.is-xlarge {
+    .sidebar-content {
+      width: $sidebar-xlarge-width;
+    }
+  }
+
+  .sidebar-content {
+    height: 100%;
+    padding: 1em;
+
+    &.is-mini {
+      .menu {
+        .menu-label {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      &:not(.is-mini-expand),
+      &.is-mini-expand:not(:hover) {
+        .menu-list {
+          li {
+            a {
+              span:nth-child(2) {
+                display: none;
+              }
+            }
+
+            ul {
+              padding-left: 0;
+
+              li {
+                a {
+                  display: inline-block;
+                }
+              }
+            }
+          }
+        }
+
+        .menu-label:not(:last-child) {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .menu-list {
+      a {
+        &.is-active {
+          background-color: transparent;
+          color: inherit;
+        }
+
+        &.is-nuxt-link-exact-active,
+        &.is-nuxt-link-active {
+          background-color: $primary;
+          color: $white;
+        }
+      }
+    }
+
+    &.is-right {
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07),
+        -4px 0 6px -4px rgba(0, 0, 0, 0.15);
+    }
+
+    .footer {
+      background-color: transparent;
+      padding: 1rem 1rem 1rem 0;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}
+
+.navbar {
+  padding-left: $sidebar-width;
+
+  &.sidebar-mini {
+    padding-left: $sidebar-mobile-width;
+  }
+}
+
+.has-border-right {
+  box-shadow: 0.0625rem 0 0 0 rgba($black, 0.1);
+}
+
+// Override fixed navbar to make height full.
+html.has-navbar-fixed-top,
+body.has-navbar-fixed-top {
+  padding-top: 0;
+}
+
+.card {
+  box-shadow: 0 2px 3px rgba(32, 32, 34, 0.1), 0 0 0 1px rgba(32, 32, 34, 0.1);
+
+  &.has-no-shadow {
+    box-shadow: none;
+  }
+
+  &.has-background-transparent {
+    background-color: transparent;
+  }
+}
+
+.content {
+  padding: 0 !important;
+  font-size: 15px;
+}
+
+.task-wrap {
+  .task-details {
+  }
+
+  .task-sidebar {
+    .field {
+      margin-bottom: 0.3em;
+
+      .label {
+        font-weight: bold;
+      }
+    }
+
+    .sidebar-item {
+      padding-bottom: 1.6em;
+
+      .taginput {
+        .taginput-container {
+          box-shadow: unset;
+          border-color: transparent;
+
+          .autocomplete {
+            box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+            max-width: 100%;
+            width: 100%;
+            background-color: white;
+            border-color: #dbdbdb;
+            border-radius: 4px;
+            color: #363636;
+          }
+        }
+      }
+
+      .estimate-progress {
+        max-width: 15em;
+
+        .progress-wrapper {
+          margin-bottom: 0.4em;
+        }
+      }
+    }
+  }
+}
+
+.button {
+  &.is-menu {
+    padding: 0 0.4em;
+    font-size: 1.4rem;
+    height: 2em;
+  }
+
+  &.has-shadow {
+    box-shadow: 0 1px 2px 0 #e0e0e4;
+    border: 1px solid #ccccd2;
+  }
+}
+
+.is-cursor-pointer {
+  cursor: pointer;
+}
+
+.task-dependencies {
+  .task-node-item {
+    width: $task-node-item-width;
+    margin-right: $task-node-item-width / 3;
+
+    &:hover {
+      .task-node-add,
+      .task-node-delete {
+        opacity: 1;
+      }
+    }
+
+    &:before {
+      content: "";
+      display: block;
+      margin-left: ($task-node-item-width - 1) / 2;
+      height: 1.4em;
+      border-left: 2px solid $border;
+      -webkit-transform: translate3d(-1px, 0, 0);
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      margin-left: ($task-node-item-width - 1) / 2;
+      height: 1.4em;
+      border-left: 2px solid $border;
+      -webkit-transform: translate3d(-1px, 0, 0);
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    &.done {
+      .card {
+        background-color: rgba($success, 0.2);
+      }
+    }
+
+    &.blocked {
+      .card {
+        background-color: rgba($danger, 0.2);
+      }
+    }
+
+    .card {
+      border-radius: $radius-large;
+
+      .card-header {
+        box-shadow: unset;
+      }
+    }
+
+    .task-node-add {
+      opacity: 0;
+      position: absolute;
+      margin-left: (($task-node-item-width) / 3);
+      margin-top: 0.5em;
+      z-index: 1;
+    }
+
+    .task-node-delete {
+      opacity: 0;
+    }
+  }
+
+  .task-nodes {
+    display: flex;
+
+    &.mini {
+      display: block;
+      padding-left: 0.7em;
+
+      .task-node {
+        border-left: 0.09em solid $border;
+        padding-left: 0.4em;
+
+        &::before {
+          content: "";
+          border-top: 0.09em solid $border;
+          display: block;
+          position: relative;
+          left: -6px !important;
+          top: 13px;
+          width: 0.4em;
+        }
+
+        &:not(:last-child)::before {
+        }
+
+        .task-node-list-item {
+        }
+      }
+    }
+
+    .task-node {
+      &:not(:last-child)::before {
+        content: "";
+        border-top: 2px solid $border;
+        display: block;
+        position: relative;
+        left: ($task-node-item-width - 1) / 2;
+      }
+    }
+  }
+}
+
+.repository-tabs {
+  .tab-content {
+    padding-left: 0;
+  }
+
+  .pull-request-list {
+    .table {
+      thead {
+        display: none;
+      }
+    }
+  }
+}
+
+.is-illustration {
+  &.is-medium {
+    img {
+      width: 14em;
+    }
+  }
+
+  &.is-large {
+    img {
+      width: 24em;
+    }
+  }
+}
+
+.dialog {
+  .modal-card {
+    .modal-card-head {
+      background-color: $white;
+      border-bottom: unset;
+      padding-top: 32px;
+    }
+
+    .modal-card-foot {
+      background-color: $white;
+      border-top: unset;
+
+      .button {
+        font-weight: inherit;
+      }
+    }
+  }
+}
+
+.dropdown {
+  .dropdown-content {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    box-shadow: 0 2px 3px rgba(32, 32, 34, 0.1), 0 0 0 1px rgba(32, 32, 34, 0.1);
+  }
+
+  .dropdown-item {
+    border-radius: $radius;
+
+    &:not(:only-child) {
+      margin-bottom: 0.125rem;
+    }
+  }
+
+  &.is-small {
+    .dropdown-menu {
+      min-width: unset;
+    }
+  }
+}
+
+.progress {
+  &.is-xsmall {
+    height: 0.35rem;
+  }
+}
+
+.tray-main-wrap {
+  border-radius: $radius;
+  background-color: $white;
+  height: 100vh;
+  .task-list {
+    height: calc(
+            100vh - #{($task-list-header-height)}
+    );
+    overflow-y: auto;
+    .table {
+      thead {
+        display: none;
+      }
+      td{
+        padding: 0;
+      }
+    }
+  }
+  .task-list-header {
+    border-bottom: 1px solid $border;
+  }
+}

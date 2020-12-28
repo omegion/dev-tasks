@@ -42,21 +42,21 @@ jobs:
         if: startsWith(matrix.os, 'macOS')
         with:
           name: mac-dmg
-          path: build/*.dmg
+          path: dist/*.dmg
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
         with:
           name: linux
-          path: build/*.deb
+          path: dist/*.deb
 
       - name: Upload Win artifacts
         uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'windows')
         with:
           name: win
-          path: build/*.exe
+          path: dist/*.exe
 
   assets:
     needs: build
