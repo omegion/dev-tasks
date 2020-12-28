@@ -56,7 +56,6 @@ export default defineComponent({
       }
 
       return tasks
-        .orderBy("priority", "desc")
         .orderBy("updatedAt", "desc")
         .limit(20)
         .get();
