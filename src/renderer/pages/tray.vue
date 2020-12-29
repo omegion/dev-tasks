@@ -17,6 +17,9 @@
           </section>
         </template>
       </b-table>
+      <div v-if="showLoadMoreButton" class="p-3 has-text-centered">
+        <b-button size="is-small" @click="increaseLimit">load more</b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -33,6 +36,8 @@ import TaskListItem from "~/components/Task/List/ItemForTray.vue";
 import TaskListHeader from "~/components/Task/List/Header/Header.vue";
 import TaskListFooter from "~/components/Task/List/Footer/Footer.vue";
 
+const LIMIT_INCREASE_NUMBER = 10;
+
 export default defineComponent({
   name: "Tray",
   layout: "tray",
@@ -40,6 +45,7 @@ export default defineComponent({
   setup() {
     const keyword = ref(null);
     const tags = ref([]);
+    const limit = ref(LIMIT_INCREASE_NUMBER);
 
     const tasks = computed(() => {
       let tasks = Task.query();
@@ -57,19 +63,28 @@ export default defineComponent({
 
       return tasks
         .orderBy("updatedAt", "desc")
-        .limit(20)
+        .limit(limit.value)
         .get();
+    });
+
+    const showLoadMoreButton = computed(() => {
+      const tasksCount = Task.query().count();
+      return tasksCount > limit.value;
     });
 
     const makeTransparent = () => {
       document.body.className = "is-transparent";
     };
 
+    const increaseLimit = () => {
+      limit.value = limit.value + LIMIT_INCREASE_NUMBER;
+    };
+
     onMounted(() => {
       makeTransparent();
     });
 
-    return { keyword, tags, tasks };
+    return { keyword, tags, tasks, showLoadMoreButton, increaseLimit };
   }
 });
 </script>

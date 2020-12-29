@@ -21,6 +21,9 @@
           </section>
         </template>
       </b-table>
+      <div v-if="showLoadMoreButton" class="p-3 has-text-centered">
+        <b-button size="is-small" @click="increaseLimit">load more</b-button>
+      </div>
     </div>
     <task-list-footer />
   </section>
@@ -38,6 +41,8 @@ import TaskListItem from "~/components/Task/List/Item.vue";
 import TaskListHeader from "~/components/Task/List/Header/Header.vue";
 import TaskListFooter from "~/components/Task/List/Footer/Footer.vue";
 
+const LIMIT_INCREASE_NUMBER = 10;
+
 export default defineComponent({
   name: "List",
   components: {
@@ -48,6 +53,7 @@ export default defineComponent({
   setup(props, { root }) {
     const keyword = ref(null);
     const tags = ref([]);
+    const limit = ref(LIMIT_INCREASE_NUMBER);
 
     const { params } = useContext();
 
@@ -68,14 +74,34 @@ export default defineComponent({
       return tasks
         .orderBy("priority", "desc")
         .orderBy("updatedAt", "desc")
+        .limit(limit.value)
         .get();
+    });
+
+    const showLoadMoreButton = computed(() => {
+      const tasksCount = Task.query()
+        .where("project_id", params.value.project_id)
+        .count();
+      return tasksCount > limit.value;
     });
 
     const routeTaskId = () => {
       return root.$route.params.task_id;
     };
 
-    return { keyword, tags, routeTaskId, tasks, params };
+    const increaseLimit = () => {
+      limit.value = limit.value + LIMIT_INCREASE_NUMBER;
+    };
+
+    return {
+      keyword,
+      tags,
+      routeTaskId,
+      tasks,
+      params,
+      increaseLimit,
+      showLoadMoreButton
+    };
   }
 });
 </script>

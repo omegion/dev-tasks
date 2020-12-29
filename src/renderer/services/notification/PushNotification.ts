@@ -21,8 +21,7 @@ export default class PushNotification {
     }
 
     this.notification = new Notification(this.title, {
-      body: this.body,
-      icon: require("~/assets/logo.png")
+      body: this.body
     });
 
     const that = this;

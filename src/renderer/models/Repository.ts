@@ -14,7 +14,7 @@ export default class Repository extends Model {
       name: this.string(""),
       repository: this.string(""),
       owner: this.string(""),
-      sync_frequency: this.number(5),
+      sync_frequency: this.number(30),
       token: this.string(""),
 
       pull_requests: this.hasMany(PullRequest, "repository_id")
@@ -53,7 +53,7 @@ export default class Repository extends Model {
     return [
       {
         name: "Never",
-        value: null
+        value: 0
       },
       {
         name: "1 Minute",
