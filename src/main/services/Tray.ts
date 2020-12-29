@@ -21,7 +21,6 @@ export default class Tray {
     this.tray = new ETray(this.getTrayIconPath());
 
     this.tray.on("click", event => {
-      event.preventDefault();
       this.showTrayWindow();
     });
 
@@ -60,6 +59,7 @@ export default class Tray {
       movable: false,
       webPreferences: {
         nodeIntegration: true,
+        contextIsolation: false,
         allowRunningInsecureContent: false,
         devTools: false
       }
@@ -94,10 +94,10 @@ export default class Tray {
   }
 
   getTrayIconPath() {
-    const platform = Platform.get()
+    const platform = Platform.get();
     if (platform === "macOS") {
-      return path.join(__dirname, "../assets/tray-icon@16x16.png")
+      return path.join(__dirname, "../assets/tray-icon@16x16.png");
     }
-    return path.join(__dirname, "../assets/tray-icon@400x400.png")
+    return path.join(__dirname, "../assets/tray-icon@400x400.png");
   }
 }

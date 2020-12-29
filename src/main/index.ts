@@ -18,11 +18,12 @@ function loadContent(port = 3000) {
 
   const mainMenu = new MainMenu(win.browserWindow);
   const menu = Menu.buildFromTemplate(mainMenu.menu);
-  Menu.setApplicationMenu(menu);
 
   // Show dev tools
   if (process.env.NODE_ENV === "development") {
     win.browserWindow.webContents.openDevTools();
+  } else {
+    Menu.setApplicationMenu(menu);
   }
 
   // Tray
@@ -31,7 +32,7 @@ function loadContent(port = 3000) {
 
   // Dock
   if (Platform.get() === "macOS") {
-    app.dock.hide()
+    app.dock.hide();
   }
 }
 
@@ -61,4 +62,3 @@ app.on("ready", async () => {
     server.listen(port, "localhost", () => loadContent(port));
   }
 });
-

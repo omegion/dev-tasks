@@ -78,17 +78,17 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
+import { computed, defineComponent, ref } from "@nuxtjs/composition-api";
 import {
   ValidationObserver,
   ValidationProvider
-} from 'vee-validate/dist/vee-validate.full'
+} from "vee-validate/dist/vee-validate.full";
 
-import Helpers from '~/plugins/helpers'
-import Repository from '~/models/Repository'
+import Helpers from "~/plugins/helpers";
+import Repository from "~/models/Repository";
 
 export default defineComponent({
-  name: 'Edit',
+  name: "Edit",
   components: { ValidationObserver, ValidationProvider },
   props: {
     repository: {
@@ -96,18 +96,18 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, { root }) {
-    const showModal = ref(false)
-    const saveButtonLoading = ref(false)
+  setup(props, { root }) {
+    const showModal = ref(false);
+    const saveButtonLoading = ref(false);
 
-    const syncFrequencyList = computed(() => Repository.syncFrequencyList())
+    const syncFrequencyList = computed(() => Repository.syncFrequencyList());
 
     const toggle = () => {
-      showModal.value = !showModal.value
-    }
+      showModal.value = !showModal.value;
+    };
 
     const updateRepository = async (closeSidebar = true) => {
-      saveButtonLoading.value = true
+      saveButtonLoading.value = true;
       await Repository.update({
         where: props.repository.$id,
         data: {
@@ -118,13 +118,14 @@ export default defineComponent({
           sync_frequency: props.repository.sync_frequency
         }
       }).finally(async () => {
-        await Helpers.delay(200)
-        saveButtonLoading.value = false
+        root.$emitter.emit("repository:updated");
+        await Helpers.delay(200);
+        saveButtonLoading.value = false;
         if (closeSidebar) {
-          toggle()
+          toggle();
         }
-      })
-    }
+      });
+    };
 
     return {
       showModal,
@@ -132,7 +133,7 @@ export default defineComponent({
       syncFrequencyList,
       toggle,
       updateRepository
-    }
+    };
   }
-})
+});
 </script>

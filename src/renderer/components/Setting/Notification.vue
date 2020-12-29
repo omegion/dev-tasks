@@ -9,31 +9,31 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
-import Setting from '~/models/Setting'
+import { computed, defineComponent } from "@nuxtjs/composition-api";
+import Setting from "~/models/Setting";
 
 export default defineComponent({
-  name: 'Notification',
-  setup () {
+  name: "Notification",
+  setup() {
     const notification = computed({
       get: () => {
-        const setting = Setting.get('notifications_enabled')
+        const setting = Setting.get("notifications_enabled");
         if (setting) {
-          return setting
+          return setting;
         }
-        return false
+        return false;
       },
       set: () => {}
-    })
+    });
 
     const save = value => {
-      Setting.set('notifications_enabled', value)
-    }
+      Setting.set("notifications_enabled", value);
+    };
 
     return {
       notification,
       save
-    }
+    };
   }
-})
+});
 </script>

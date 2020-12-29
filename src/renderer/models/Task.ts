@@ -32,14 +32,16 @@ export default class Task extends Model {
         "pull_request_id"
       ),
       tags: this.belongsToMany(Tag, TagTask, "task_id", "tag_id"),
-      dependencies: this.hasMany(Task, "parent_id"),
+      dependencies: this.hasMany(Task, "parent_id")
     };
   }
 
   async deleteWithRelations() {
-    const task = this.$query().with("pull_requests").find(this.id);
+    const task = this.$query()
+      .with("pull_requests")
+      .find(this.id);
     // @ts-ignore
-    task.pull_requests.forEach((pull) => {
+    task.pull_requests.forEach(pull => {
       pull.$delete();
     });
     return await task.$delete();
@@ -50,18 +52,18 @@ export default class Task extends Model {
       {
         slug: "in_progress",
         name: "In Progress",
-        type: "is-primary",
+        type: "is-primary"
       },
       {
         slug: "done",
         name: "Done",
-        type: "is-success",
+        type: "is-success"
       },
       {
         slug: "blocked",
         name: "Blocked",
-        type: "is-danger",
-      },
+        type: "is-danger"
+      }
     ];
   }
 
@@ -71,33 +73,33 @@ export default class Task extends Model {
         value: 4,
         name: "Highest",
         icon: "arrow-up",
-        type: "is-danger",
+        type: "is-danger"
       },
       {
         value: 3,
         name: "High",
         icon: "arrow-up",
-        type: "is-danger",
+        type: "is-danger"
       },
       {
         value: 2,
         name: "Medium",
         icon: "arrow-up",
-        type: "is-warning",
+        type: "is-warning"
       },
 
       {
         value: 1,
         name: "Low",
         icon: "arrow-down",
-        type: "is-success",
+        type: "is-success"
       },
       {
         value: 0,
         name: "Lowest",
         icon: "arrow-down",
-        type: "is-success",
-      },
+        type: "is-success"
+      }
     ];
   }
 
@@ -109,15 +111,15 @@ export default class Task extends Model {
           items: [
             {
               text: "Build the binary.",
-              checked: true,
+              checked: true
             },
             {
               text: "Apply the Terraform",
-              checked: false,
-            },
-          ],
-        },
-      },
+              checked: false
+            }
+          ]
+        }
+      }
     ];
   }
 
@@ -126,10 +128,16 @@ export default class Task extends Model {
       data: {
         name: "Example Task",
         project_id: project_id,
-        startedAt: moment().toDate().toISOString(),
-        updatedAt: moment().toDate().toISOString(),
-        createdAt: moment().toDate().toISOString(),
-      },
+        startedAt: moment()
+          .toDate()
+          .toISOString(),
+        updatedAt: moment()
+          .toDate()
+          .toISOString(),
+        createdAt: moment()
+          .toDate()
+          .toISOString()
+      }
     });
   }
 
@@ -145,4 +153,5 @@ export default class Task extends Model {
   endedAt: string;
   project_id: string;
   pull_requests: PullRequest[];
+  dependencies: Task[];
 }

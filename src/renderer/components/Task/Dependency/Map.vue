@@ -25,12 +25,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
-import Node from '~/components/Task/Dependency/Node.vue'
-import Task from '~/models/Task'
+import {
+  defineComponent,
+  onMounted,
+  ref,
+  onUnmounted
+} from "@nuxtjs/composition-api";
+import Node from "~/components/Task/Dependency/Node.vue";
+import Task from "~/models/Task";
 
 export default defineComponent({
-  name: 'Map',
+  name: "Map",
   components: { Node },
   props: {
     task: {
@@ -38,17 +43,27 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, { root }) {
-    const showModal = ref(false)
+  setup(props, { root }) {
+    const showModal = ref(false);
 
     const toggle = () => {
-      showModal.value = !showModal.value
-    }
+      showModal.value = !showModal.value;
+    };
+
+    onMounted(() => {
+      root.$emitter.on("toggleDependencyMap", e => {
+        toggle();
+      });
+    });
+
+    onUnmounted(() => {
+      root.$emitter.off("toggleDependencyMap", e => {});
+    });
 
     return {
       showModal,
       toggle
-    }
+    };
   }
-})
+});
 </script>

@@ -38,6 +38,9 @@
           </b-autocomplete>
         </b-field>
         <div v-if="isSelected">
+          <b-field label="Name">
+            <b-input v-model="selected.name" placeholder="e.g. My label" />
+          </b-field>
           <b-field label="Color">
             <b-dropdown v-model="selected.type" aria-role="list">
               <button slot="trigger" class="button" type="button">
@@ -80,6 +83,14 @@
             >
               Save
             </b-button>
+            <b-button
+              v-if="isSelected"
+              type="is-danger"
+              :loading="deleteButtonLoading"
+              @click="deleteTagConfirm"
+            >
+              Delete
+            </b-button>
             <b-button @click="toggle">Cancel</b-button>
           </div>
         </div>
@@ -92,6 +103,7 @@
 import { computed, defineComponent, ref } from "@nuxtjs/composition-api";
 import Tag from "~/models/Tag";
 import Helpers from "~/plugins/helpers";
+import { DialogProgrammatic as Dialog } from "buefy";
 
 export default defineComponent({
   name: "TagsEdit",
@@ -101,6 +113,7 @@ export default defineComponent({
     const selected = ref<Tag>(null);
     const types = ref(["is-primary", "is-danger", "is-success", "is-light"]);
     const saveButtonLoading = ref(false);
+    const deleteButtonLoading = ref(false);
 
     const toggle = () => {
       showModal.value = !showModal.value;
@@ -134,12 +147,32 @@ export default defineComponent({
       await Tag.update({
         where: selected.value.id,
         data: {
+          name: selected.value.name,
           type: selected.value.type,
           description: selected.value.description
         }
       }).finally(async () => {
         await Helpers.delay(200);
         saveButtonLoading.value = false;
+        toggle();
+      });
+    };
+
+    const deleteTagConfirm = () => {
+      Dialog.confirm({
+        title: "Delete Tag",
+        message: `You're about to delete <strong>${selected.value.name}</strong>. This cannot be undone.`,
+        confirmText: "Delete",
+        type: "is-danger",
+        onConfirm: () => deleteTag()
+      });
+    };
+
+    const deleteTag = async () => {
+      deleteButtonLoading.value = true;
+      await Tag.delete(selected.value.id).finally(async () => {
+        await Helpers.delay(200);
+        deleteButtonLoading.value = false;
         toggle();
       });
     };
@@ -152,9 +185,11 @@ export default defineComponent({
       types,
       isSelected,
       saveButtonLoading,
+      deleteButtonLoading,
       toggle,
       getNameByType,
-      updateTag
+      updateTag,
+      deleteTagConfirm
     };
   }
 });

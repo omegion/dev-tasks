@@ -16,6 +16,7 @@ export default class MainWindow {
       webPreferences: {
         webSecurity: this.isProduction(),
         allowRunningInsecureContent: false,
+        contextIsolation: false,
         nodeIntegration: true
       }
     });

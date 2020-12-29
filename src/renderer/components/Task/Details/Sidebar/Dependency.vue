@@ -2,8 +2,8 @@
   <section>
     <b-field :addons="false">
       <template slot="label">
-        <dependency-map ref="tagsEdit" :task="task">
-          <a @click="$refs.tagsEdit.toggle()">Dependency</a>
+        <dependency-map ref="dependencyMap" :task="task">
+          <a @click="$refs.dependencyMap.toggle()">Dependency</a>
         </dependency-map>
       </template>
       <dependency-list :task="task" />
@@ -12,13 +12,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import DependencyMap from '~/components/Task/Dependency/Map.vue'
-import DependencyList from '~/components/Task/Dependency/List.vue'
-import Task from '~/models/Task'
+import { defineComponent } from "@nuxtjs/composition-api";
+import DependencyMap from "~/components/Task/Dependency/Map.vue";
+import DependencyList from "~/components/Task/Dependency/List.vue";
+import Task from "~/models/Task";
 
 export default defineComponent({
-  name: 'Dependency',
+  name: "Dependency",
   components: { DependencyMap, DependencyList },
   props: {
     task: {
@@ -26,8 +26,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, { root }) {
-    return {}
+  setup(props, { root }) {
+    return {};
   }
-})
+});
 </script>

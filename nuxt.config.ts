@@ -21,10 +21,11 @@ const config: Configuration = {
   },
   css: ["~assets/scss/app.scss", "@mdi/font/css/materialdesignicons.min.css"],
   plugins: [
+    { ssr: true, src: "@/plugins/event-bus.ts" },
     { ssr: true, src: "@/plugins/directives.js" },
     { ssr: true, src: "@/plugins/buefy.js" },
     { ssr: true, src: "@/plugins/filters.js" },
-    { ssr: true, src: "@/plugins/jobs.js" },
+    { ssr: true, src: "@/plugins/jobs.ts" },
     { ssr: true, src: "@/plugins/ips-renderer.js" },
     { ssr: true, src: "@/plugins/sentry.js" }
   ],
