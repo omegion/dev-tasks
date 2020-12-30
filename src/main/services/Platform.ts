@@ -1,3 +1,5 @@
+import {app} from "electron";
+
 export default class Platform {
   static get(): "macOS" | "Windows" | "Linux" {
     const platformName = process.platform;
@@ -17,6 +19,6 @@ export default class Platform {
   }
 
   static isProduction(): boolean {
-    return process.env.NODE_ENV === "production";
+    return app.isPackaged;
   }
 }
