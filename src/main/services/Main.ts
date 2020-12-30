@@ -22,24 +22,12 @@ export default class Main {
     this.application.on("ready", () => {
       this.onReady();
     });
-    this.application.on("will-quit", () => {
-      this.onWillQuit();
-    });
-    this.application.on("before-quit", () => {
-      this.onBeforeQuit();
-    });
     this.application.on("quit", () => {
       this.onQuit();
     });
   }
 
   async setupDev() {
-    // Importing dev dependencies
-    const devtools = await import("electron-devtools-installer");
-
-    // Installing devtools
-    // await devtools.default(devtools.VUEJS_DEVTOOLS);
-
     // Waiting for web server
     waitOn({ resources: [`http://localhost:3000`] }, this.setupWindows);
   }
@@ -69,12 +57,11 @@ export default class Main {
     this.trayWindow = new Tray(this.mainWindow, mainMenu.trayMenu, port);
     this.trayWindow.create();
 
-
     Menu.setApplicationMenu(mainMenu.applicationMenu);
 
     // Show doc for MacOS
     if (Platform.get() === "macOS") {
-      app.dock.setMenu(mainMenu.dockMenu)
+      app.dock.setMenu(mainMenu.dockMenu);
     }
 
     // Show dev tools
@@ -91,15 +78,5 @@ export default class Main {
     }
   }
 
-  onWillQuit() {
-    console.log('onWillQuit')
-  }
-
-  onBeforeQuit() {
-    console.log('onBeforeQuit')
-  }
-
-  onQuit() {
-    console.log('onQuit')
-  }
+  onQuit() {}
 }

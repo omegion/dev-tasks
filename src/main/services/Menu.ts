@@ -1,5 +1,5 @@
 import os from "os";
-import { app, shell, dialog, Menu, BrowserWindow} from "electron";
+import { app, shell, dialog, Menu, BrowserWindow } from "electron";
 import Platform from "./Platform";
 
 const { version, author } = require("../../../package.json");
@@ -51,7 +51,7 @@ export default class MainMenu {
             }
           },
           {
-            type: 'separator'
+            type: "separator"
           },
           {
             label: "Quit",
@@ -66,51 +66,22 @@ export default class MainMenu {
         label: "Edit",
         submenu: [
           {
-            role: 'undo'
+            role: "undo"
           },
           {
-            role: 'redo'
+            role: "redo"
           },
           {
-            type: 'separator'
+            type: "separator"
           },
           {
-            role: 'cut'
+            role: "cut"
           },
           {
-            role: 'copy'
+            role: "copy"
           },
           {
-            role: 'paste'
-          }
-        ]
-      },
-      {
-        label: 'Developer',
-        submenu: [
-          {
-            role: 'reload'
-          },
-          {
-            role: 'toggleDevTools'
-          },
-          {
-            type: 'separator'
-          },
-          {
-            role: 'resetZoom'
-          },
-          {
-            role: 'zoomIn'
-          },
-          {
-            role: 'zoomOut'
-          },
-          {
-            type: 'separator'
-          },
-          {
-            role: 'togglefullscreen'
+            role: "paste"
           }
         ]
       },
@@ -133,6 +104,35 @@ export default class MainMenu {
           {
             label: "Bring All to Front",
             role: "front"
+          }
+        ]
+      },
+      {
+        label: "Developer",
+        submenu: [
+          {
+            role: "reload"
+          },
+          {
+            role: "toggleDevTools"
+          },
+          {
+            type: "separator"
+          },
+          {
+            role: "resetZoom"
+          },
+          {
+            role: "zoomIn"
+          },
+          {
+            role: "zoomOut"
+          },
+          {
+            type: "separator"
+          },
+          {
+            role: "togglefullscreen"
           }
         ]
       },
@@ -186,7 +186,9 @@ export default class MainMenu {
             label: "Open Developer Tools",
             accelerator: "Alt+CommandOrControl+I",
             click() {
-              that.mainBrowserWindow.webContents.openDevTools({ mode: "detach" });
+              that.mainBrowserWindow.webContents.openDevTools({
+                mode: "detach"
+              });
             }
           }
         ]
@@ -208,7 +210,7 @@ export default class MainMenu {
         click() {
           that.mainBrowserWindow.webContents.send("menu:new-repository");
         }
-      },
+      }
     ]);
   }
 
@@ -229,7 +231,7 @@ export default class MainMenu {
         click() {
           app.exit();
         }
-      },
+      }
     ]);
   }
 }

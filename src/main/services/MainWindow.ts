@@ -1,4 +1,5 @@
-import {app, BrowserWindow, ipcMain} from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
+import Platform from "./Platform";
 
 export default class MainWindow {
   browserWindow: BrowserWindow;
@@ -26,11 +27,16 @@ export default class MainWindow {
     this.browserWindow.on("close", evt => {
       evt.preventDefault();
       this.browserWindow.hide();
-      app.dock.hide();
+
+      if (Platform.isMac()) {
+        app.dock.hide();
+      }
     });
 
     this.browserWindow.on("show", evt => {
-      app.dock.show();
+      if (Platform.isMac()) {
+        app.dock.show();
+      }
     });
 
     ipcMain.on("route:push", (event, args) => {
