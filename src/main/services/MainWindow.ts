@@ -10,7 +10,7 @@ export default class MainWindow {
     this.port = port;
   }
 
-  create() {
+  async create() {
     this.browserWindow = new BrowserWindow({
       height: 800,
       width: 1280,
@@ -22,7 +22,7 @@ export default class MainWindow {
       }
     });
 
-    this.browserWindow.loadURL(`http://localhost:${this.port}`);
+    await this.browserWindow.loadURL(`http://localhost:${this.port}`);
 
     this.browserWindow.on("close", evt => {
       evt.preventDefault();

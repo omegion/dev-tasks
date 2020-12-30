@@ -13,7 +13,7 @@ export default class Platform {
   }
 
   static isMac(): boolean {
-    return Platform.get() === "macOS"
+    return Platform.get() === "macOS";
   }
 
   static isProduction(): boolean {

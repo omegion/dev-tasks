@@ -2,12 +2,13 @@ import { Configuration } from "@nuxt/types";
 
 const config: Configuration = {
   ssr: false,
+  target: "static",
   head: {
     title: "Dev Tasks",
     meta: [{ charset: "utf-8" }]
   },
   loadingIndicator: {
-    name: "pulse",
+    name: "~/assets/loading.html",
     color: "#3755BE",
     background: "white"
   },
