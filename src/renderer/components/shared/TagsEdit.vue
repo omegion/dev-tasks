@@ -11,7 +11,7 @@
       class="is-medium"
     >
       <div class="section">
-        <b-field label="Tags">
+        <b-field v-if="!isSelected" label="Tags">
           <b-autocomplete
             v-model="keyword"
             placeholder="e.g. Productivity"
@@ -37,10 +37,16 @@
             </template>
           </b-autocomplete>
         </b-field>
-        <div v-if="isSelected">
-          <b-field label="Name">
-            <b-input v-model="selected.name" placeholder="e.g. My label" />
-          </b-field>
+        <ValidationObserver v-else ref="observer" v-slot="{ handleSubmit }">
+          <ValidationProvider v-slot="{ errors }" rules="required" name="Name">
+            <b-field
+              label="Name"
+              :type="{ 'is-danger': errors[0] }"
+              :message="errors"
+            >
+              <b-input v-model="selected.name" placeholder="e.g. My label" />
+            </b-field>
+          </ValidationProvider>
           <b-field label="Color">
             <b-dropdown v-model="selected.type" aria-role="list">
               <button slot="trigger" class="button" type="button">
@@ -72,28 +78,28 @@
               placeholder="e.g. great label"
             />
           </b-field>
-        </div>
-        <div class="footer">
-          <div class="buttons">
-            <b-button
-              v-if="isSelected"
-              type="is-primary"
-              :loading="saveButtonLoading"
-              @click="updateTag"
-            >
-              Save
-            </b-button>
-            <b-button
-              v-if="isSelected"
-              type="is-danger"
-              :loading="deleteButtonLoading"
-              @click="deleteTagConfirm"
-            >
-              Delete
-            </b-button>
-            <b-button @click="toggle">Cancel</b-button>
+          <div class="footer">
+            <div class="buttons">
+              <b-button
+                v-if="isSelected"
+                type="is-primary"
+                :loading="saveButtonLoading"
+                @click="handleSubmit(updateTag)"
+              >
+                Save
+              </b-button>
+              <b-button
+                v-if="isSelected"
+                type="is-danger"
+                :loading="deleteButtonLoading"
+                @click="deleteTagConfirm"
+              >
+                Delete
+              </b-button>
+              <b-button @click="toggle">Cancel</b-button>
+            </div>
           </div>
-        </div>
+        </ValidationObserver>
       </div>
     </b-sidebar>
   </section>
@@ -101,12 +107,20 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "@nuxtjs/composition-api";
+import {
+  ValidationObserver,
+  ValidationProvider
+} from "vee-validate/dist/vee-validate.full";
 import Tag from "~/models/Tag";
 import Helpers from "~/plugins/helpers";
 import { DialogProgrammatic as Dialog } from "buefy";
 
 export default defineComponent({
   name: "TagsEdit",
+  components: {
+    ValidationObserver,
+    ValidationProvider
+  },
   setup(props, { emit }) {
     const showModal = ref(false);
     const keyword = ref(null);
@@ -116,6 +130,7 @@ export default defineComponent({
     const deleteButtonLoading = ref(false);
 
     const toggle = () => {
+      selected.value = null;
       showModal.value = !showModal.value;
     };
 

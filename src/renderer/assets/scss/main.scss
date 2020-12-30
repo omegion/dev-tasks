@@ -10,6 +10,7 @@ body {
   &.is-transparent {
     background-color: transparent;
   }
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -38,7 +39,7 @@ body {
       .task-list,
       .repository-list {
         height: calc(
-          100vh - #{($task-list-header-height + $task-list-footer-height)}
+                100vh - #{($task-list-header-height + $task-list-footer-height)}
         );
         overflow-y: auto;
       }
@@ -156,8 +157,15 @@ body {
       }
     }
 
+    &.is-right {
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07),
+      -4px 0 6px -4px rgba(0, 0, 0, 0.15);
+    }
+
     .menu-list {
       a {
+        border-radius: $radius;
+
         &.is-active {
           background-color: transparent;
           color: inherit;
@@ -167,13 +175,16 @@ body {
         &.is-nuxt-link-active {
           background-color: $primary;
           color: $white;
+          box-shadow: 0 2px 3px rgba(32, 32, 34, 0.1), 0 0 0 1px rgba(32, 32, 34, 0.1);
         }
       }
     }
 
-    &.is-right {
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07),
-        -4px 0 6px -4px rgba(0, 0, 0, 0.15);
+    .logo {
+      img {
+        -webkit-filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+        filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+      }
     }
 
     .footer {
@@ -466,20 +477,24 @@ body.has-navbar-fixed-top {
   border-radius: $radius;
   background-color: $white;
   height: 100vh;
+
   .task-list {
     height: calc(
             100vh - #{($task-list-header-height)}
     );
     overflow-y: auto;
+
     .table {
       thead {
         display: none;
       }
-      td{
+
+      td {
         padding: 0;
       }
     }
   }
+
   .task-list-header {
     border-bottom: 1px solid $border;
   }

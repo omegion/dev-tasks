@@ -9,7 +9,7 @@
         />
       </div>
       <div class="ml-1">
-        <b-button icon-left="filter" type="is-text" @click="toggleFilter" />
+        <b-button icon-left="tune" type="is-text" @click="toggleFilter" />
       </div>
     </div>
     <div v-show="showFilter" class="py-3">

@@ -207,7 +207,7 @@ export default defineComponent({
         }
       }).then(async res => {
         // @ts-ignore
-        await pullRequest.sync();
+        await pullRequest.sync(false);
         saveButtonLoading.value = false;
         toggle();
       });

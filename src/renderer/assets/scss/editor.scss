@@ -67,7 +67,7 @@ $max-width: 40em;
           height: 100%;
           background-color: $white-ter;
           border-radius: $radius;
-          border: 1px solid $border;
+          box-shadow: 0 1px 3px rgba(32, 32, 34, 0.1), 0 0 0 1px rgba(32, 32, 34, 0.1);
           font-size: 13px;
           font-family: monospace;
           z-index: 0;
@@ -100,19 +100,46 @@ $max-width: 40em;
     width: unset;
   }
 
-  .ce-toolbar__settings-btn {
-    width: unset;
-    height: 28px;
-    background: transparent;
+  .ce-toolbar {
+    &__settings-btn {
+      width: unset;
+      height: 28px;
+      background: transparent;
 
-    .icon {
-      height: 12px;
-      width: 12px;
+      .icon {
+        height: 12px;
+        width: 12px;
+      }
+    }
+
+    &__content {
+      .ce-settings {
+        border: unset;
+        box-shadow: 0 2px 3px rgba(32, 32, 34, 0.1), 0 0 0 1px rgba(32, 32, 34, 0.1);
+
+        &__button {
+          color: $text;
+
+          &--confirm {
+            color: $white;
+          }
+        }
+      }
     }
   }
 
   .ce-inline-tool {
     color: $black-light;
+  }
+
+  .ce-inline-toolbar {
+    border: unset;
+    box-shadow: 0 2px 3px rgba(32, 32, 34, 0.1), 0 0 0 1px rgba(32, 32, 34, 0.1);
+
+    .ce-conversion-toolbar {
+      border: unset;
+      box-shadow: 0 2px 3px rgba(32, 32, 34, 0.1), 0 0 0 1px rgba(32, 32, 34, 0.1);
+    }
   }
 
   .ce-toolbar__actions {

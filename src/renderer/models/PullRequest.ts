@@ -32,13 +32,13 @@ export default class PullRequest extends Model {
     };
   }
 
-  async sync() {
+  async sync(notify = true) {
     console.log("Syncing a pull request.");
     const repository = await Repository.find(this.repository_id);
     await repository
       .pull(this.pull_number)
       .then(({ data }) => {
-        if (this.hasNewComment(data)) {
+        if (this.hasNewComment(data) && notify) {
           const notification = new NewPullRequestComment(this);
           notification.send();
         }
@@ -94,7 +94,15 @@ export default class PullRequest extends Model {
   name: string;
   pull_number: number;
   state: "open" | "closed";
-  mergeable_state: string;
+  mergeable_state:
+    | "behind"
+    | "blocked"
+    | "clean"
+    | "dirty"
+    | "draft"
+    | "has_hooks"
+    | "unknown"
+    | "unstable";
   mergable: boolean | null;
   comments_count: Number;
   repository_id: string;
