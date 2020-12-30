@@ -36,6 +36,9 @@
         "mac": {
             "icon": "static/icons/icon.icns",
             "target": "dmg",
+            "extendInfo": {
+                "LSUIElement": 0
+            },
             "publish": null
         },
         "nsis": {

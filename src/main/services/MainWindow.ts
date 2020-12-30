@@ -21,6 +21,8 @@ export default class MainWindow {
       }
     });
 
+    this.browserWindow.loadURL(`http://localhost:${this.port}`);
+
     this.browserWindow.on("close", evt => {
       evt.preventDefault();
       this.browserWindow.hide();
