@@ -1,22 +1,26 @@
 import os from "os";
+import { app, shell, dialog, Menu, BrowserWindow} from "electron";
+import Platform from "./Platform";
 
-const { app, shell, dialog, BrowserWindow } = require("electron");
 const { version, author } = require("../../../package.json");
 
 const GITHUB_REPOSITORY = "https://github.com/omegion/dev-tasks";
 
-const isMac = process.platform === "darwin";
 const year = new Date().getFullYear();
 
 export default class MainMenu {
-  window: any;
-  menu: Array<any>;
+  mainBrowserWindow: BrowserWindow;
+  applicationMenu: Menu;
+  dockMenu: Menu;
+  trayMenu: Menu;
 
-  constructor(window) {
-    this.window = window;
-    this.menu = this.getMenu();
+  constructor(mainBrowserWindow: BrowserWindow) {
+    this.mainBrowserWindow = mainBrowserWindow;
+    this.applicationMenu = this.getApplicationMenu();
+    this.dockMenu = this.getDockMenu();
+    this.trayMenu = this.getTrayMenu();
 
-    if (isMac) {
+    if (Platform.isMac()) {
       app.setAboutPanelOptions({
         applicationName: "dev-tasks",
         applicationVersion: version,
@@ -26,9 +30,9 @@ export default class MainMenu {
     }
   }
 
-  getMenu() {
+  getApplicationMenu() {
     const that = this;
-    return [
+    return Menu.buildFromTemplate([
       {
         label: "File",
         submenu: [
@@ -36,24 +40,24 @@ export default class MainMenu {
             label: "New Project",
             accelerator: "CommandOrControl+N",
             click() {
-              that.window.webContents.send("menu:new-project");
+              that.mainBrowserWindow.webContents.send("menu:new-project");
             }
           },
           {
             label: "New Repository",
             accelerator: "CommandOrControl+T",
             click() {
-              that.window.webContents.send("menu:new-repository");
+              that.mainBrowserWindow.webContents.send("menu:new-repository");
             }
           },
           {
-            type: "separator"
+            type: 'separator'
           },
           {
             label: "Quit",
             accelerator: "CmdOrCtrl+Q",
             click() {
-              that.window.close();
+              that.mainBrowserWindow.close();
             }
           }
         ]
@@ -62,57 +66,51 @@ export default class MainMenu {
         label: "Edit",
         submenu: [
           {
-            label: "Undo",
-            accelerator: "CommandOrControl+Z",
-            click(menuItem, focusedWin) {
-              that.window.webContents.send("menu:undo");
-              focusedWin.webContents.undo();
-            },
-            selector: "undo:"
+            role: 'undo'
           },
           {
-            label: "Redo",
-            accelerator: "Shift+CommandOrControl+Z",
-            click(menuItem, focusedWin) {
-              that.window.webContents.send("menu:redo");
-              focusedWin.webContents.redo();
-            },
-            selector: "redo:"
+            role: 'redo'
           },
           {
-            type: "separator"
+            type: 'separator'
           },
           {
-            label: "Cut",
-            accelerator: "CommandOrControl+X",
-            click(menuItem, focusedWin) {
-              that.window.webContents.send("menu:cut");
-              focusedWin.webContents.cut();
-            },
-            selector: "cut:"
+            role: 'cut'
           },
           {
-            label: "Copy",
-            accelerator: "CommandOrControl+C",
-            click(menuItem, focusedWin) {
-              that.window.webContents.send("menu:copy");
-              focusedWin.webContents.copy();
-            },
-            selector: "copy:"
+            role: 'copy'
           },
           {
-            label: "Paste",
-            accelerator: "CommandOrControl+V",
-            click(menuItem, focusedWin) {
-              that.window.webContents.send("menu:paste");
-              focusedWin.webContents.paste();
-            },
-            selector: "paste:"
+            role: 'paste'
+          }
+        ]
+      },
+      {
+        label: 'Developer',
+        submenu: [
+          {
+            role: 'reload'
           },
           {
-            label: "Select All",
-            accelerator: "CommandOrControl+A",
-            selector: "selectAll:"
+            role: 'toggleDevTools'
+          },
+          {
+            type: 'separator'
+          },
+          {
+            role: 'resetZoom'
+          },
+          {
+            role: 'zoomIn'
+          },
+          {
+            role: 'zoomOut'
+          },
+          {
+            type: 'separator'
+          },
+          {
+            role: 'togglefullscreen'
           }
         ]
       },
@@ -122,19 +120,19 @@ export default class MainMenu {
           {
             label: "Minimize",
             accelerator: "Command+M",
-            selector: "performMiniaturize:"
+            role: "minimize"
           },
           {
             label: "Close",
             accelerator: "Command+W",
-            selector: "performClose:"
+            role: "close"
           },
           {
             type: "separator"
           },
           {
             label: "Bring All to Front",
-            selector: "arrangeInFront:"
+            role: "front"
           }
         ]
       },
@@ -188,11 +186,50 @@ export default class MainMenu {
             label: "Open Developer Tools",
             accelerator: "Alt+CommandOrControl+I",
             click() {
-              that.window.webContents.openDevTools({ mode: "detach" });
+              that.mainBrowserWindow.webContents.openDevTools({ mode: "detach" });
             }
           }
         ]
       }
-    ];
+    ]);
+  }
+
+  getDockMenu() {
+    const that = this;
+    return Menu.buildFromTemplate([
+      {
+        label: "New Project",
+        click() {
+          that.mainBrowserWindow.webContents.send("menu:new-project");
+        }
+      },
+      {
+        label: "New Repository",
+        click() {
+          that.mainBrowserWindow.webContents.send("menu:new-repository");
+        }
+      },
+    ]);
+  }
+
+  getTrayMenu() {
+    const that = this;
+    return Menu.buildFromTemplate([
+      {
+        label: "Show",
+        click() {
+          that.mainBrowserWindow.show();
+        }
+      },
+      {
+        type: "separator"
+      },
+      {
+        label: "Quit",
+        click() {
+          app.exit();
+        }
+      },
+    ]);
   }
 }

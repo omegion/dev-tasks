@@ -1,46 +1,32 @@
 import { app, BrowserWindow, ipcMain, Menu, Tray as ETray } from "electron";
 import path from "path";
 import Platform from "./Platform";
+import MainWindow from "@@/services/MainWindow";
 
 const positioner = require("electron-traywindow-positioner");
 
 export default class Tray {
   browserWindow: BrowserWindow;
-  mainBrowserWindow: BrowserWindow;
+  mainWindow: MainWindow;
   port: number;
   tray: ETray;
+  contextMenu: Menu
 
-  constructor(mainBrowserWindow: BrowserWindow, port = 3000) {
+  constructor(mainWindow: MainWindow, contextMenu: Menu,port = 3000) {
     this.browserWindow = null;
-    this.mainBrowserWindow = mainBrowserWindow;
+    this.mainWindow = mainWindow;
     this.port = port;
     this.tray = null;
+    this.contextMenu = contextMenu;
   }
 
   create() {
     this.tray = new ETray(this.getTrayIconPath());
+    this.tray.setIgnoreDoubleClickEvents(true)
+    this.tray.setContextMenu(this.contextMenu);
 
     this.tray.on("click", event => {
       this.showTrayWindow();
-    });
-
-    this.tray.on("right-click", () => {
-      const that = this;
-      const contextMenu = Menu.buildFromTemplate([
-        {
-          label: "Show",
-          click() {
-            that.mainBrowserWindow.show();
-          }
-        },
-        {
-          label: "Close",
-          click() {
-            app.exit();
-          }
-        }
-      ]);
-      this.tray.setContextMenu(contextMenu);
     });
 
     this.createWindow();
@@ -67,8 +53,6 @@ export default class Tray {
 
     this.browserWindow.loadURL(`http://localhost:${this.port}/tray`);
 
-    // this.browserWindow.webContents.openDevTools();
-
     this.browserWindow.on("blur", () => {
       this.browserWindow.hide();
     });
@@ -77,9 +61,14 @@ export default class Tray {
       this.browserWindow.focus();
     });
 
+    this.browserWindow.on("close", evt => {
+      evt.preventDefault();
+      this.browserWindow.hide();
+    });
+
     ipcMain.on("route:push", (event, args) => {
       this.browserWindow.hide();
-      this.mainBrowserWindow.webContents.send("route:push", args);
+      this.mainWindow.browserWindow.webContents.send("route:push", args);
     });
   }
 

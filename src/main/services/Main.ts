@@ -19,11 +19,17 @@ export default class Main {
   }
 
   async run() {
-    this.application.on("window-all-closed", () => {
-      this.onWindowAllClosed();
-    });
     this.application.on("ready", () => {
       this.onReady();
+    });
+    this.application.on("will-quit", () => {
+      this.onWillQuit();
+    });
+    this.application.on("before-quit", () => {
+      this.onBeforeQuit();
+    });
+    this.application.on("quit", () => {
+      this.onQuit();
     });
   }
 
@@ -56,28 +62,26 @@ export default class Main {
 
   setupWindows(port = 3000) {
     this.mainWindow = new MainWindow(port);
-    this.trayWindow = new Tray(this.mainWindow.browserWindow, port);
-
     this.mainWindow.create();
-    this.trayWindow.create();
 
     const mainMenu = new MainMenu(this.mainWindow.browserWindow);
-    const menu = Menu.buildFromTemplate(mainMenu.menu);
+
+    this.trayWindow = new Tray(this.mainWindow, mainMenu.trayMenu, port);
+    this.trayWindow.create();
+
+
+    Menu.setApplicationMenu(mainMenu.applicationMenu);
 
     // Show doc for MacOS
     if (Platform.get() === "macOS") {
-      app.dock.hide();
+      app.dock.setMenu(mainMenu.dockMenu)
     }
 
     // Show dev tools
-    if (Platform.isProduction()) {
-      Menu.setApplicationMenu(menu);
-    } else {
+    if (!Platform.isProduction()) {
       this.mainWindow.browserWindow.webContents.openDevTools();
     }
   }
-
-  onWindowAllClosed() {}
 
   async onReady() {
     if (Platform.isProduction()) {
@@ -85,5 +89,17 @@ export default class Main {
     } else {
       await this.setupDev();
     }
+  }
+
+  onWillQuit() {
+    console.log('onWillQuit')
+  }
+
+  onBeforeQuit() {
+    console.log('onBeforeQuit')
+  }
+
+  onQuit() {
+    console.log('onQuit')
   }
 }

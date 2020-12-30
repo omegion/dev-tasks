@@ -11,6 +11,11 @@ export default class Platform {
       return "Linux";
     }
   }
+
+  static isMac(): boolean {
+    return Platform.get() === "macOS"
+  }
+
   static isProduction(): boolean {
     return process.env.NODE_ENV === "production";
   }
