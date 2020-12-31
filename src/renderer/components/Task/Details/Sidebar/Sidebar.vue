@@ -1,5 +1,5 @@
 <template>
-  <div class="task-sidebar">
+  <div class="task-sidebar pt-5">
     <div class="sidebar-item">
       <b-field label="Status" />
       <task-status :task="task" />
@@ -23,9 +23,13 @@
     <div class="sidebar-item">
       <time-tracking :task="task" />
     </div>
-    <div class="sidebar-item">
-      <hr />
-      <task-footer :created-at="task.createdAt" :updated-at="task.updatedAt" />
+    <div class="footer">
+      <div class="sidebar-item">
+        <task-footer
+          :created-at="task.createdAt"
+          :updated-at="task.updatedAt"
+        />
+      </div>
     </div>
   </div>
 </template>

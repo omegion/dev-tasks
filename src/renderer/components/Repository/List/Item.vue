@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="repository-list-item">
     <context-menu ref="menu" :repository="repository" />
     <NuxtLink
       tag="div"
@@ -27,7 +27,7 @@
         </div>
       </div>
     </NuxtLink>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

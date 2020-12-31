@@ -1,26 +1,26 @@
 <template>
   <section>
     <div class="columns">
-      <div class="column is-8">
+      <div class="column">
         <task-name v-if="task" :task="task" />
         <task-description :blocks="blocks" />
       </div>
-      <div class="column is-4">
-        <task-sidebar v-if="task" :task="task" />
-      </div>
     </div>
+    <portal to="inner-right">
+      <task-sidebar v-if="task" :task="task" />
+    </portal>
   </section>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
-import TaskName from '~/components/Task/Details/Name.vue'
-import TaskDescription from '~/components/Task/Details/Description.vue'
-import TaskSidebar from '~/components/Task/Details/Sidebar/Sidebar.vue'
-import Node from '~/components/Task/Dependency/Node.vue'
+import { computed, defineComponent } from "@nuxtjs/composition-api";
+import TaskName from "~/components/Task/Details/Name.vue";
+import TaskDescription from "~/components/Task/Details/Description.vue";
+import TaskSidebar from "~/components/Task/Details/Sidebar/Sidebar.vue";
+import Node from "~/components/Task/Dependency/Node.vue";
 
 export default defineComponent({
-  name: 'Details',
+  name: "Details",
   components: {
     TaskName,
     TaskDescription,
@@ -32,18 +32,18 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, { root }) {
+  setup(props, { root }) {
     const blocks = computed(() => {
       if (props.task) {
         // @ts-ignore
-        return props.task.blocks
+        return props.task.blocks;
       }
-      return []
-    })
+      return [];
+    });
 
     return {
       blocks
-    }
+    };
   }
-})
+});
 </script>

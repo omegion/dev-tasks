@@ -1,0 +1,22 @@
+@import "perfect-scrollbar/css/perfect-scrollbar.css";
+
+
+// PerfectSidebar
+.ps {
+  &__rail {
+    &-y {
+      width: 8px;
+
+      &:hover, .ps--clicking {
+        .ps__thumb-y {
+          background-color: $border;
+          width: 6px;
+        }
+      }
+    }
+  }
+
+  .ps__thumb-y {
+    width: 4px;
+  }
+}

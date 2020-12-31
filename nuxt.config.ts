@@ -38,7 +38,7 @@ const config: Configuration = {
     }
   },
   buildModules: ["@nuxtjs/composition-api", "@nuxt/typescript-build"],
-  modules: ["@nuxtjs/sentry"],
+  modules: ["@nuxtjs/sentry", "portal-vue/nuxt"],
   sentry: {
     dsn:
       "https://b9c8de3a859e46fbb8c2f7728c228556@o317749.ingest.sentry.io/5570497",

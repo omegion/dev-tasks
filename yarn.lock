@@ -994,6 +994,11 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
+"@interactjs/types@1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@interactjs/types/-/types-1.10.1.tgz#1b676079579f5f619c24af95951248ad92de5e35"
+  integrity sha512-qJs3o2MrfLu62wnKNLfMZECa1mQY78hSAq9Ld0qJovV+j8qFk96ZI/3L6oXqyepNH3FaIyYPpWNBTlVUC7goPw==
+
 "@mdi/font@^5.8.55":
   version "5.8.55"
   resolved "https://registry.yarnpkg.com/@mdi/font/-/font-5.8.55.tgz#1464155bcbc8a6e4af6dffd611fe8e38e09af285"
@@ -5724,6 +5729,13 @@ inquirer@^7.3.3:
     strip-ansi "^6.0.0"
     through "^2.3.6"
 
+interactjs@^1.10.1:
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/interactjs/-/interactjs-1.10.1.tgz#0224cf3fe8f85dcebef439b1068f516730efe01b"
+  integrity sha512-h/VEGTaBv8ch7m52Y7uAHzOs2v6nNc+AVH2sE+T/q7T8liDLfHF+6G3RRP+l+/K3tZAQcHElvMn0EOkX6wni/g==
+  dependencies:
+    "@interactjs/types" "1.10.1"
+
 ip@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
@@ -7437,6 +7449,11 @@ pend@~1.2.0:
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
   integrity sha1-elfrVQpng/kRUzH89GY9XI4AelA=
 
+perfect-scrollbar@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/perfect-scrollbar/-/perfect-scrollbar-1.5.0.tgz#821d224ed8ff61990c23f26db63048cdc75b6b83"
+  integrity sha512-NrNHJn5mUGupSiheBTy6x+6SXCFbLlm8fVZh9moIzw/LgqElN5q4ncR4pbCBCYuCJ8Kcl9mYM0NgDxvW+b4LxA==
+
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
@@ -7487,6 +7504,11 @@ pkg-dir@^4.1.0:
   integrity sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==
   dependencies:
     find-up "^4.0.0"
+
+portal-vue@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/portal-vue/-/portal-vue-2.1.7.tgz#ea08069b25b640ca08a5b86f67c612f15f4e4ad4"
+  integrity sha512-+yCno2oB3xA7irTt0EU5Ezw22L2J51uKAacE/6hMPMoO/mx3h4rXFkkBkT4GFsMDv/vEe8TNKC3ujJJ0PTwb6g==
 
 posix-character-classes@^0.1.0:
   version "0.1.1"

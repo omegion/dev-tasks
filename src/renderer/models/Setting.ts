@@ -8,35 +8,41 @@ export default class Setting extends Model {
   static fields() {
     return {
       name: this.string(""),
-      value: this.string(""),
+      value: this.string("")
     };
   }
 
-  static get(key: string) {
-    const setting = Setting.query().where("name", key).first();
+  static get(key: string, defaultValue = null) {
+    const setting = Setting.query()
+      .where("name", key)
+      .first();
     if (setting) {
       return setting.value;
+    } else if (defaultValue !== null) {
+      return defaultValue;
     }
     return setting;
   }
 
   static set(key: string, value: any) {
-    const setting = Setting.query().where("name", key).first();
+    const setting = Setting.query()
+      .where("name", key)
+      .first();
     if (setting) {
       return Setting.update({
-        where: (setting) => {
+        where: setting => {
           return setting.name === key;
         },
         data: {
-          value: value,
-        },
+          value: value
+        }
       });
     }
     return Setting.insert({
       data: {
         name: key,
-        value: value,
-      },
+        value: value
+      }
     });
   }
 

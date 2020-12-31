@@ -18,7 +18,9 @@
               type="is-primary"
             />
             <span>{{ passedTimeInHours.toFixed(1) }}h passed</span>
-            <span class="is-pulled-right">{{ remainingTimeInHours.toFixed(0) }}h remaining</span>
+            <span class="is-pulled-right"
+              >{{ remainingTimeInHours.toFixed(0) }}h</span
+            >
           </div>
           <div v-else>completed in {{ completedTimeInHours.toFixed(1) }}h</div>
         </div>
@@ -33,12 +35,12 @@ import {
   defineComponent,
   onMounted,
   ref
-} from '@nuxtjs/composition-api'
-import moment from 'moment'
-import Task from '~/models/Task'
+} from "@nuxtjs/composition-api";
+import moment from "moment";
+import Task from "~/models/Task";
 
 export default defineComponent({
-  name: 'TimeTracking',
+  name: "TimeTracking",
   components: {},
   props: {
     task: {
@@ -46,46 +48,46 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
-    const now = ref(moment())
+  setup(props) {
+    const now = ref(moment());
 
     const passedTimeInHours = computed(() => {
-      const startedAt = moment(props.task.startedAt)
-      const duration = moment.duration(now.value.diff(startedAt))
-      return duration.asHours()
-    })
+      const startedAt = moment(props.task.startedAt);
+      const duration = moment.duration(now.value.diff(startedAt));
+      return duration.asHours();
+    });
 
     const remainingTimeInHours = computed(
       () => props.task.estimate - passedTimeInHours.value
-    )
+    );
 
-    const isCompleted = computed(() => props.task.endedAt !== 'null')
+    const isCompleted = computed(() => props.task.endedAt !== "null");
     const isOverdue = computed(
       () => remainingTimeInHours.value < 0 && !isCompleted.value
-    )
+    );
     const progressPercentage = computed(() => {
       if (isCompleted.value || remainingTimeInHours.value < 0) {
-        return 100
+        return 100;
       }
-      return (passedTimeInHours.value / remainingTimeInHours.value) * 100
-    })
+      return (passedTimeInHours.value / remainingTimeInHours.value) * 100;
+    });
 
     const completedTimeInHours = computed(() => {
-      const startedAt = moment(props.task.startedAt)
-      const endedAt = moment(props.task.endedAt)
-      const duration = moment.duration(endedAt.diff(startedAt))
-      return duration.asHours()
-    })
+      const startedAt = moment(props.task.startedAt);
+      const endedAt = moment(props.task.endedAt);
+      const duration = moment.duration(endedAt.diff(startedAt));
+      return duration.asHours();
+    });
 
     const overdueTimeInHours = computed(() => {
-      return passedTimeInHours.value - props.task.estimate
-    })
+      return passedTimeInHours.value - props.task.estimate;
+    });
 
     onMounted(() => {
       setInterval(() => {
-        now.value = moment()
-      }, 1000)
-    })
+        now.value = moment();
+      }, 1000);
+    });
 
     return {
       passedTimeInHours,
@@ -95,7 +97,7 @@ export default defineComponent({
       isOverdue,
       completedTimeInHours,
       overdueTimeInHours
-    }
+    };
   }
-})
+});
 </script>

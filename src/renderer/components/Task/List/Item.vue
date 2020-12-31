@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="task-list-item">
     <context-menu ref="menu" :task="task" />
     <NuxtLink
       tag="div"
@@ -40,7 +40,7 @@
         </div>
       </div>
     </NuxtLink>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

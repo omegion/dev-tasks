@@ -1,31 +1,29 @@
 <template>
-  <div class="columns inner-wrap">
-    <div class="column has-border-right is-inner-left">
+  <div>
+    <portal to="inner-left">
       <task-list />
-    </div>
-    <div class="column is-9 is-inner-right">
-      <NuxtChild />
-    </div>
+    </portal>
+    <NuxtChild />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, useContext } from '@nuxtjs/composition-api'
-import TaskList from '~/components/Task/List/List.vue'
+import { computed, defineComponent, useContext } from "@nuxtjs/composition-api";
+import TaskList from "~/components/Task/List/List.vue";
 
 export default defineComponent({
-  name: 'Index',
+  name: "Index",
   components: {
     TaskList
   },
-  setup () {
-    const { route } = useContext()
+  setup() {
+    const { route } = useContext();
 
     const isTaskSelected = computed(
-      () => route.value.name === 'projects.project_id.tasks.index.task_id'
-    )
+      () => route.value.name === "projects.project_id.tasks.index.task_id"
+    );
 
-    return { isTaskSelected }
+    return { isTaskSelected };
   }
-})
+});
 </script>

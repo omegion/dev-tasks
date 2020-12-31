@@ -1,11 +1,9 @@
 <template>
-  <div class="columns inner-wrap">
-    <div class="column has-border-right is-inner-left">
+  <div>
+    <portal to="inner-left">
       <list />
-    </div>
-    <div class="column is-9 is-inner-right">
-      <NuxtChild />
-    </div>
+    </portal>
+    <NuxtChild />
   </div>
 </template>
 
@@ -13,6 +11,7 @@
 import { defineComponent } from "@nuxtjs/composition-api";
 import List from "~/components/Repository/List/List.vue";
 
+const MIN = 100;
 export default defineComponent({
   name: "Index",
   components: { List }
