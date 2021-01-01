@@ -12,7 +12,7 @@ A free and open source task management tool for developers.
     <img alt="GitHub" src="https://img.shields.io/github/license/omegion/dev-tasks">
 </p>
 <p align="center">
-    <img src="./static/dev-tasks-mockup.png" width="80">
+    <img src="./static/dev-tasks-mockup.png">
     <br>  
     <strong>Built with Electron and Vue.</strong>
 </p>
