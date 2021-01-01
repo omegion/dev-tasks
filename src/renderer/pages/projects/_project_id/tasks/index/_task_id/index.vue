@@ -25,7 +25,7 @@ export default defineComponent({
   setup(props, { root }) {
     const title = ref();
 
-    const { params } = useContext();
+    const { params, route } = useContext();
 
     const task = computed(() => {
       return Task.query()
