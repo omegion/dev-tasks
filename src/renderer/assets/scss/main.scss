@@ -209,7 +209,7 @@ body {
     .footer {
       background-color: transparent;
       padding: 1rem 1rem 1rem 0;
-      position: absolute;
+      position: fixed;
       bottom: 0;
     }
   }
@@ -365,6 +365,7 @@ body.has-navbar-fixed-top {
     }
 
     .card {
+      overflow: visible;
       border-radius: $radius-large;
 
       .card-header {

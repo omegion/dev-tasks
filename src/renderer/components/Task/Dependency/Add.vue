@@ -3,11 +3,11 @@
     <slot />
     <b-dropdown
       ref="dropdownRef"
-      position="is-bottom-right"
+      position="is-top-right"
       append-to-body
       aria-role="menu"
-      trap-focus
       :close-on-click="false"
+      :trap-focus="true"
     >
       <b-button slot="trigger" icon-left="plus" rounded size="is-small" />
       <b-dropdown-item
@@ -16,24 +16,22 @@
         custom
         paddingless
       >
-        <div class="card has-no-shadow" style="width: 300px">
-          <div class="card-content">
-            <b-field label="Task">
-              <b-autocomplete
-                v-model="keyword"
-                placeholder="search in tasks"
-                :open-on-focus="true"
-                :data="tasks"
-                field="name"
-                :clearable="true"
-                @select="option => (selectedTask = option)"
-              />
-            </b-field>
-            <div class="pt-3">
-              <b-button type="is-primary" expanded @click="addDependency">
-                Add
-              </b-button>
-            </div>
+        <div class="p-4" style="width: 300px">
+          <b-field label="Task">
+            <b-autocomplete
+              v-model="keyword"
+              placeholder="search in tasks"
+              :open-on-focus="true"
+              :data="tasks"
+              field="name"
+              :clearable="true"
+              @select="option => (selectedTask = option)"
+            />
+          </b-field>
+          <div class="pt-3">
+            <b-button type="is-primary" expanded @click="addDependency">
+              Add
+            </b-button>
           </div>
         </div>
       </b-dropdown-item>
