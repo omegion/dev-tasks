@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <side-bar />
     <div :class="['main-wrap', { 'sidebar-mini': isSidebarReduced }]">
       <div class="columns inner-wrap">
@@ -32,7 +32,8 @@ import {
   computed,
   defineComponent,
   onMounted,
-  ref
+  ref,
+  watch
 } from "@nuxtjs/composition-api";
 import interact from "interactjs";
 import { debounce } from "lodash";
@@ -52,6 +53,10 @@ export default defineComponent({
     const centerSideRef = ref(null);
     const leftSideRef = ref(null);
     const rightSideRef = ref(null);
+
+    const isDarkMode = computed(
+      () => Setting.get("dark_mode", false) === "true"
+    );
 
     const sidebarMini = computed(() =>
       Setting.query()
@@ -80,6 +85,14 @@ export default defineComponent({
     const isSidebarReduced = computed(
       () => sidebarMini.value === null || sidebarMini.value.value === "false"
     );
+
+    const decideMode = () => {
+      if (isDarkMode.value) {
+        document.body.classList.add("is-dark");
+      } else {
+        document.body.classList.remove("is-dark");
+      }
+    };
 
     const initInteract = () => {
       interact(leftSideRef.value).resizable({
@@ -133,7 +146,10 @@ export default defineComponent({
       Setting.set("inner_right_side_width", width);
     }, 500);
 
+    watch(isDarkMode, decideMode);
+
     onMounted(() => {
+      decideMode();
       initInteract();
       perfectScrollBar();
     });
@@ -142,6 +158,7 @@ export default defineComponent({
       centerSideRef,
       leftSideRef,
       rightSideRef,
+      isDarkMode,
       isSidebarReduced,
       innerLeftSideStyle,
       innerRightSideStyle

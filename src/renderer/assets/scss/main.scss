@@ -5,7 +5,7 @@ html {
 body {
   margin: 0;
   height: 100vh;
-  background-color: $white;
+  background-color: $body-background-color;
 
   &.is-transparent {
     background-color: transparent;
@@ -76,7 +76,7 @@ body {
           padding: 0;
 
           .is-nuxt-link-exact-active {
-            background-color: $white-ter;
+            background-color: $white-bis;
           }
         }
 
@@ -285,7 +285,6 @@ body.has-navbar-fixed-top {
     }
 
     .estimate-progress {
-      width: 90%;
       max-width: 15em;
 
       .progress-wrapper {
@@ -371,6 +370,10 @@ body.has-navbar-fixed-top {
       .card-header {
         box-shadow: unset;
       }
+
+      .list-title {
+        color: $text;
+      }
     }
 
     .task-node-add {
@@ -407,10 +410,8 @@ body.has-navbar-fixed-top {
           width: 0.4em;
         }
 
-        &:not(:last-child)::before {
-        }
-
-        .task-node-list-item {
+        .list-title {
+          color: $text
         }
       }
     }

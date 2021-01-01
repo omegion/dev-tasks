@@ -11,12 +11,12 @@
       <b-icon size="is-small" icon="circle-medium" :type="currentStatus.type" />
       <NuxtLink
         tag="a"
-        class="list-title has-text-black has-text-weight-medium"
+        class="list-title has-text-weight-medium"
         :to="{
           name: 'projects.project_id.tasks.index.task_id',
           params: {
-            task_id: task.id,
-          },
+            task_id: task.id
+          }
         }"
       >
         {{ task.name | trim(20) }}
@@ -26,21 +26,21 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
-import Task from '~/models/Task'
+import { computed, defineComponent } from "@nuxtjs/composition-api";
+import Task from "~/models/Task";
 
 export default defineComponent({
-  name: 'NodeListItem',
+  name: "NodeListItem",
   props: {
     task: {
       type: Task,
       required: true
     }
   },
-  setup (props, { root }) {
+  setup(props, { root }) {
     const isTooltipActive = computed(() => {
-      return props.task.name.length > 20
-    })
+      return props.task.name.length > 20;
+    });
 
     const removeParent = () => {
       Task.update({
@@ -48,14 +48,14 @@ export default defineComponent({
         data: {
           parent_id: null
         }
-      })
-    }
+      });
+    };
 
     const currentStatus = computed(() =>
       Task.statusList().find(s => s.slug === props.task.status)
-    )
+    );
 
-    return { removeParent, isTooltipActive, currentStatus }
+    return { removeParent, isTooltipActive, currentStatus };
   }
-})
+});
 </script>

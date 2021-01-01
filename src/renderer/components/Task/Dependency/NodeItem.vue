@@ -17,12 +17,12 @@
         >
           <NuxtLink
             tag="a"
-            class="list-title has-text-black has-text-weight-semibold"
+            class="list-title has-text-weight-semibold"
             :to="{
               name: 'projects.project_id.tasks.index.task_id',
               params: {
-                task_id: task.id,
-              },
+                task_id: task.id
+              }
             }"
           >
             {{ task.name | trim(20) }}
@@ -42,13 +42,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
-import Task from '~/models/Task'
-import Add from '~/components/Task/Dependency/Add.vue'
-import Delete from '~/components/Task/Dependency/Delete.vue'
+import { computed, defineComponent } from "@nuxtjs/composition-api";
+import Task from "~/models/Task";
+import Add from "~/components/Task/Dependency/Add.vue";
+import Delete from "~/components/Task/Dependency/Delete.vue";
 
 export default defineComponent({
-  name: 'NodeItem',
+  name: "NodeItem",
   components: { Add, Delete },
   props: {
     task: {
@@ -56,10 +56,10 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, { root }) {
+  setup(props, { root }) {
     const isTooltipActive = computed(() => {
-      return props.task.name.length > 20
-    })
+      return props.task.name.length > 20;
+    });
 
     const removeParent = () => {
       Task.update({
@@ -67,10 +67,10 @@ export default defineComponent({
         data: {
           parent_id: null
         }
-      })
-    }
+      });
+    };
 
-    return { removeParent, isTooltipActive }
+    return { removeParent, isTooltipActive };
   }
-})
+});
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <b-sidebar position="static" type="is-light" :reduce="isReduced" open>
+  <b-sidebar position="static" :reduce="isReduced" open>
     <div class="block logo">
       <div class="media">
         <div class="media-left">

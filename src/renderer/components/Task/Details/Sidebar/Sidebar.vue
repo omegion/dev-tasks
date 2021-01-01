@@ -1,5 +1,5 @@
 <template>
-  <div class="task-sidebar pt-5">
+  <div class="task-sidebar pt-5 pr-5">
     <div class="sidebar-item">
       <b-field label="Status" />
       <task-status :task="task" />

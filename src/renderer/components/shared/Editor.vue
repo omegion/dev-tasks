@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import {
+  computed,
   defineComponent,
   onBeforeUnmount,
   onMounted,
@@ -15,6 +16,7 @@ import EditorJS from "@editorjs/editorjs";
 import CodeMirrorTool from "~/plugins/editor/code-mirror";
 import AlertTool from "~/plugins/editor/alert/alert";
 import Helpers from "~/plugins/helpers";
+import Setting from "~/models/Setting";
 
 export const PLUGINS = {
   header: require("@editorjs/header"),
@@ -49,8 +51,12 @@ export default defineComponent({
     const editor = ref<EditorJS>(null);
     const { params } = useContext();
 
+    const isDarkMode = computed(
+      () => Setting.get("dark_mode", false) === "true"
+    );
+
     const initEditor = () => {
-      return new EditorJS({
+      editor.value = new EditorJS({
         holder: "editor",
         autofocus: true,
         inlineToolbar: true,
@@ -70,7 +76,10 @@ export default defineComponent({
           checklist: PLUGINS.checklist,
           code_mirror: {
             class: PLUGINS.code_mirror_tool,
-            shortcut: "CMD+SHIFT+C"
+            shortcut: "CMD+SHIFT+C",
+            config: {
+              theme: isDarkMode.value ? "dracula" : "default"
+            }
           },
           alert: PLUGINS.alert
         },
@@ -135,6 +144,14 @@ export default defineComponent({
     };
 
     watch(
+      () => isDarkMode.value,
+      () => {
+        destroyEditor();
+        initEditor();
+      }
+    );
+
+    watch(
       () => params.value.task_id,
       () => {
         reRender();
@@ -149,7 +166,7 @@ export default defineComponent({
     );
 
     onMounted(() => {
-      editor.value = initEditor();
+      initEditor();
       openInBrowser();
     });
 

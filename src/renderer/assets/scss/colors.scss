@@ -13,6 +13,15 @@ $black-light: #42526e;
 $black-dark: findDarkColor($black);
 $black-invert: findColorInvert($black);
 
+$dark: #0d1117;
+$dark-light: #161b22;
+$dark-lighter: #21262d;
+$dark-text: #8b949e;
+
+
+$white-ter: hsl(0, 0%, 82%);
+$white-bis: hsl(0, 0%, 95%);
+
 $twitter: #4099ff;
 $twitter-invert: findColorInvert($twitter);
 
@@ -22,68 +31,79 @@ $custom-shades: null !default;
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
-  (
-    "white": (
-      $white,
-      $black,
-    ),
-    "black": (
-      $black,
-      $white,
-    ),
-    "light": (
-      $light,
-      $light-invert,
-    ),
-    "dark": (
-      $dark,
-      $dark-invert,
-    ),
-    "primary": (
-      $primary,
-      $primary-invert,
-      $primary-light,
-      $primary-dark,
-    ),
-    "secondary": (
-      $secondary,
-      $secondary-invert,
-      $secondary-light,
-      $secondary-dark,
-    ),
-    "link": (
-      $link,
-      $link-invert,
-      $link-light,
-      $link-dark,
-    ),
-    "info": (
-      $info,
-      $info-invert,
-      $info-light,
-      $info-dark,
-    ),
-    "success": (
-      $success,
-      $success-invert,
-      $success-light,
-      $success-dark,
-    ),
-    "warning": (
-      $warning,
-      $warning-invert,
-      $warning-light,
-      $warning-dark,
-    ),
-    "danger": (
-      $danger,
-      $danger-invert,
-      $danger-light,
-      $danger-dark,
-    ),
-  ),
-  $custom-colors
+                (
+                        "white": (
+                                $white,
+                                $black,
+                        ),
+                        "black": (
+                                $black,
+                                $white,
+                        ),
+                        "light": (
+                                $light,
+                                $light-invert,
+                        ),
+                        "dark": (
+                                $dark,
+                                $dark-invert,
+                        ),
+                        "dark-light": (
+                                $dark-light,
+                                $white,
+                        ),
+                        "dark-lighter": (
+                                $dark-lighter,
+                                $white,
+                        ),
+                        "primary": (
+                                $primary,
+                                $primary-invert,
+                                $primary-light,
+                                $primary-dark,
+                        ),
+                        "secondary": (
+                                $secondary,
+                                $secondary-invert,
+                                $secondary-light,
+                                $secondary-dark,
+                        ),
+                        "link": (
+                                $link,
+                                $link-invert,
+                                $link-light,
+                                $link-dark,
+                        ),
+                        "info": (
+                                $info,
+                                $info-invert,
+                                $info-light,
+                                $info-dark,
+                        ),
+                        "success": (
+                                $success,
+                                $success-invert,
+                                $success-light,
+                                $success-dark,
+                        ),
+                        "warning": (
+                                $warning,
+                                $warning-invert,
+                                $warning-light,
+                                $warning-dark,
+                        ),
+                        "danger": (
+                                $danger,
+                                $danger-invert,
+                                $danger-light,
+                                $danger-dark,
+                        ),
+                ),
+                $custom-colors
 );
+
+//Body
+$body-background-color: $white;
 
 // Links
 $link: $primary;
@@ -99,3 +119,17 @@ $modal-background-background-color: rgba($black, .3);
 // Dropdown
 $dropdown-item-active-color: $black;
 $dropdown-item-active-background-color: $primary-light;
+
+// Table
+$table-row-active-color: $text;
+$table-row-active-background-color: $white-ter;
+
+// Form
+$label-color: $black;
+$label-weight: $weight-normal;
+
+// Navbar
+$navbar-box-shadow-color: rgba($black, 0.1);
+
+// Sidebar
+$sidebar-box-shadow: 0.0625rem 0 0 0 rgba($black, 0.1);

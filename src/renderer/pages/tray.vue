@@ -25,12 +25,7 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  ref
-} from "@nuxtjs/composition-api";
+import { computed, defineComponent, ref } from "@nuxtjs/composition-api";
 import Task from "~/models/Task";
 import TaskListItem from "~/components/Task/List/ItemForTray.vue";
 import TaskListHeader from "~/components/Task/List/Header/Header.vue";
@@ -72,17 +67,9 @@ export default defineComponent({
       return tasksCount > limit.value;
     });
 
-    const makeTransparent = () => {
-      document.body.className = "is-transparent";
-    };
-
     const increaseLimit = () => {
       limit.value = limit.value + LIMIT_INCREASE_NUMBER;
     };
-
-    onMounted(() => {
-      makeTransparent();
-    });
 
     return { keyword, tags, tasks, showLoadMoreButton, increaseLimit };
   }

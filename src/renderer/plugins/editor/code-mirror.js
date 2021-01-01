@@ -59,6 +59,10 @@ class CodeMirror {
     return Object.keys(LANGUAGES);
   }
 
+  static get DEFAULT_THEME() {
+    return "default";
+  }
+
   get CSS() {
     return {
       baseClass: this.api.styles.block,
@@ -80,6 +84,7 @@ class CodeMirror {
     this.languagePlaceholder =
       config.languagePlaceholder || CodeMirror.DEFAULT_LANGUAGE_PLACEHOLDER;
     this.format = config.format || CodeMirror.DEFAULT_FORMAT_CONFIG;
+    this.theme = config.theme || CodeMirror.DEFAULT_THEME;
 
     this.settings = [
       {
@@ -165,7 +170,7 @@ class CodeMirror {
       mode: LANGUAGES[this.data.language].toLowerCase(),
       matchBrackets: true,
       showCursorWhenSelecting: true,
-      theme: "default",
+      theme: this.theme,
       autoCloseTags: true,
       dragDrop: true,
       lint: true,

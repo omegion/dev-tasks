@@ -11,6 +11,7 @@
       class="is-medium"
     >
       <div class="section">
+        <dark-mode />
         <notification />
         <analytics />
         <div class="footer">
@@ -24,31 +25,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
-import Notification from '~/components/Setting/Notification.vue'
-import Analytics from '~/components/Setting/Analytics.vue'
+import { defineComponent, ref } from "@nuxtjs/composition-api";
+import DarkMode from "~/components/Setting/DarkMode.vue";
+import Notification from "~/components/Setting/Notification.vue";
+import Analytics from "~/components/Setting/Analytics.vue";
 
 export default defineComponent({
-  name: 'Create',
-  components: { Notification, Analytics },
-  setup () {
-    const showModal = ref(false)
-    const saveButtonLoading = ref(false)
+  name: "Create",
+  components: { DarkMode, Notification, Analytics },
+  setup() {
+    const showModal = ref(false);
+    const saveButtonLoading = ref(false);
 
     const toggle = () => {
-      showModal.value = !showModal.value
-    }
+      showModal.value = !showModal.value;
+    };
 
     const save = () => {
-      showModal.value = !showModal.value
-    }
+      showModal.value = !showModal.value;
+    };
 
     return {
       showModal,
       saveButtonLoading,
       toggle,
       save
-    }
+    };
   }
-})
+});
 </script>

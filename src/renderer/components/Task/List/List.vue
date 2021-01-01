@@ -6,6 +6,7 @@
         :data="tasks"
         :row-class="(row, index) => row.id === routeTaskId && 'is-selected'"
         :hoverable="true"
+        :mobile-cards="false"
       >
         <b-table-column v-slot="props" field="name">
           <task-list-item :task="props.row" />
