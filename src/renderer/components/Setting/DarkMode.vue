@@ -2,9 +2,9 @@
   <b-field>
     <template slot="label">
       Dark Mode
-      <p class="is-size-7">Help to improve the application.</p>
+      <p class="is-size-7">Enable dark mode for the application.</p>
     </template>
-    <b-switch v-model="analytics" @input="save" />
+    <b-switch v-model="darkMode" @input="save" />
   </b-field>
 </template>
 
@@ -15,7 +15,7 @@ import Setting from "~/models/Setting";
 export default defineComponent({
   name: "DarkMode",
   setup() {
-    const analytics = computed({
+    const darkMode = computed({
       get: () => {
         const setting = Setting.get("dark_mode");
         if (setting) {
@@ -31,7 +31,7 @@ export default defineComponent({
     };
 
     return {
-      analytics,
+      darkMode,
       save
     };
   }

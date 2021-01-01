@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
+import { defineComponent, useContext } from "@nuxtjs/composition-api";
 import ContextMenuComp from "@/components/shared/ContextMenu/ContextMenu.vue";
 import Task from "~/models/Task.ts";
 import AddPullRequest from "~/components/PullRequest/Create.vue";
@@ -47,6 +47,8 @@ export default defineComponent({
     }
   },
   setup(props, { root }) {
+    const { route } = useContext();
+
     const deleteTaskConfirm = () => {
       Dialog.confirm({
         title: "Delete Task",
@@ -60,6 +62,10 @@ export default defineComponent({
     const deleteTask = async () => {
       await props.task.deleteWithRelations().then(() => {
         Snackbar.open("Task deleted.");
+        root.$router.push({
+          name: "projects.project_id.tasks",
+          params: { project_id: props.task.project_id }
+        });
       });
     };
 
