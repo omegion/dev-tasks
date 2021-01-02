@@ -1,7 +1,7 @@
 name: Build Dev Tasks
 
 on:
-  push:
+  create:
     tags:
       - 'v*'
 
