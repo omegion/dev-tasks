@@ -100,6 +100,9 @@
             </div>
           </div>
         </ValidationObserver>
+        <div v-if="!isSelected" class="footer">
+          <b-button @click="toggle">Cancel</b-button>
+        </div>
       </div>
     </b-sidebar>
   </section>
