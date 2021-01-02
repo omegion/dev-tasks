@@ -5,6 +5,7 @@ import TagTask from "~/models/TagTask";
 import PullRequest from "~/models/PullRequest";
 import PullRequestTask from "~/models/PullRequestTask";
 import moment from "moment";
+import Collections from "@vuex-orm/core/lib/data/Collections";
 
 export default class Task extends Model {
   static entity = "tasks";
@@ -124,7 +125,7 @@ export default class Task extends Model {
   }
 
   static async insertDefault(project_id: string) {
-    await this.insert({
+    return await this.insert({
       data: {
         name: "Example Task",
         project_id: project_id,

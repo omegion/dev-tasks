@@ -10,7 +10,7 @@
         >
           <portal-target name="inner-left" />
         </div>
-        <div class="column is-inner-center" ref="centerSideRef">
+        <div class="column is-inner-center">
           <nuxt />
         </div>
         <div
@@ -22,6 +22,7 @@
         </div>
       </div>
     </div>
+    <shortcuts />
   </div>
 </template>
 
@@ -37,7 +38,7 @@ import {
 } from "@nuxtjs/composition-api";
 import interact from "interactjs";
 import { debounce } from "lodash";
-import PerfectScrollbar from "perfect-scrollbar";
+import Shortcuts from "~/components/shared/Shortcuts.vue";
 
 const DEFAULT_LEFT_INNER_SIDE_WIDTH: number = 250;
 const MIN_LEFT_INNER_SIDE_WIDTH: number = 180;
@@ -48,7 +49,7 @@ const MIN_RIGHT_INNER_SIDE_WIDTH: number = 180;
 const MAX_RIGHT_INNER_SIDE_WIDTH: number = 480;
 
 export default defineComponent({
-  components: { SideBar },
+  components: { Shortcuts, SideBar },
   setup({ root }) {
     const centerSideRef = ref(null);
     const leftSideRef = ref(null);
@@ -132,12 +133,6 @@ export default defineComponent({
       });
     };
 
-    const perfectScrollBar = () => {
-      const ps = new PerfectScrollbar(centerSideRef.value, {
-        wheelPropagation: true
-      });
-    };
-
     const saveInnerLeftSideWidth = debounce(width => {
       Setting.set("inner_left_side_width", width);
     }, 500);
@@ -151,11 +146,9 @@ export default defineComponent({
     onMounted(() => {
       decideMode();
       initInteract();
-      perfectScrollBar();
     });
 
     return {
-      centerSideRef,
       leftSideRef,
       rightSideRef,
       isDarkMode,

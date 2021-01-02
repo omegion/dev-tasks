@@ -1,7 +1,7 @@
 <template>
   <section>
     <task-list-header v-model="keyword" :tags.sync="tags" />
-    <div class="task-list" ref="taskListRef">
+    <div class="task-list">
       <b-table
         :data="tasks"
         :row-class="(row, index) => row.id === routeTaskId && 'is-selected'"
@@ -42,7 +42,6 @@ import Task from "~/models/Task";
 import TaskListItem from "~/components/Task/List/Item.vue";
 import TaskListHeader from "~/components/Task/List/Header/Header.vue";
 import TaskListFooter from "~/components/Task/List/Footer/Footer.vue";
-import PerfectScrollbar from "perfect-scrollbar";
 
 const LIMIT_INCREASE_NUMBER = 10;
 
@@ -57,7 +56,6 @@ export default defineComponent({
     const keyword = ref(null);
     const tags = ref([]);
     const limit = ref(LIMIT_INCREASE_NUMBER);
-    const taskListRef = ref(null);
 
     const { params } = useContext();
 
@@ -97,20 +95,9 @@ export default defineComponent({
       limit.value = limit.value + LIMIT_INCREASE_NUMBER;
     };
 
-    const perfectScrollBar = () => {
-      const ps = new PerfectScrollbar(taskListRef.value, {
-        wheelPropagation: true
-      });
-    };
-
-    onMounted(() => {
-      perfectScrollBar();
-    });
-
     return {
       keyword,
       tags,
-      taskListRef,
       routeTaskId,
       tasks,
       params,

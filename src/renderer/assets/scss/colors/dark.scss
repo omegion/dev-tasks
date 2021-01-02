@@ -195,6 +195,11 @@
   h4, h5, h6, strong {
     color: $white-ter !important;
   }
+  code {
+    background-color: $dark-lighter;
+    border-radius: $radius;
+    border: 1px solid $grey-dark;
+  }
 
   // Dropdown
   .dropdown-content {
@@ -242,6 +247,24 @@
         color: $dark-text
       }
     }
+
+    .modal-card-head {
+      border-top: 1px solid $dark-lighter;
+      border-left: 1px solid $dark-lighter;
+      border-right: 1px solid $dark-lighter;
+    }
+
+    .modal-card-body {
+      border-left: 1px solid $dark-lighter;
+      border-right: 1px solid $dark-lighter;
+    }
+
+    .modal-card-foot {
+      border-bottom: 1px solid $dark-lighter;
+      border-left: 1px solid $dark-lighter;
+      border-right: 1px solid $dark-lighter;
+    }
+
   }
 
   // Table
@@ -390,5 +413,11 @@
         }
       }
     }
+  }
+
+  // Snackbar
+  .notices .snackbar {
+    background: $dark-light;
+    border: 1px solid $dark-lighter;
   }
 }

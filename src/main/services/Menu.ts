@@ -37,15 +37,22 @@ export default class MainMenu {
         label: "File",
         submenu: [
           {
-            label: "New Project",
+            label: "New Task",
             accelerator: "CommandOrControl+N",
+            click() {
+              that.mainBrowserWindow.webContents.send("menu:new-task");
+            }
+          },
+          {
+            label: "New Project",
+            accelerator: "CommandOrControl+P",
             click() {
               that.mainBrowserWindow.webContents.send("menu:new-project");
             }
           },
           {
             label: "New Repository",
-            accelerator: "CommandOrControl+T",
+            accelerator: "CommandOrControl+R",
             click() {
               that.mainBrowserWindow.webContents.send("menu:new-repository");
             }
@@ -140,6 +147,15 @@ export default class MainMenu {
         label: "Help",
         role: "help",
         submenu: [
+          {
+            label: "Shortcuts",
+            click() {
+              that.mainBrowserWindow.webContents.send("shortcuts:show");
+            }
+          },
+          {
+            type: "separator"
+          },
           {
             label: "Release Notes",
             click() {
