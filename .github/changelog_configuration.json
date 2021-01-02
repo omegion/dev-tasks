@@ -1,0 +1,39 @@
+{
+  "categories": [
+    {
+      "title": "### Features",
+      "labels": [
+        "feature"
+      ]
+    },
+    {
+      "title": "### Fixes",
+      "labels": [
+        "fix",
+        "bug"
+      ]
+    },
+    {
+      "title": "### Tests",
+      "labels": [
+        "test"
+      ]
+    },
+    {
+      "title": "### Other Changes",
+      "labels": [
+        "other"
+      ]
+    },
+    {
+      "title": "### Dependencies",
+      "labels": [
+        "dependencies"
+      ]
+    }
+  ],
+  "sort": "ASC",
+  "template": "${{CHANGELOG}}",
+  "pr_template": "- ${{TITLE}} (#${{NUMBER}})",
+  "empty_template": "- no changes"
+}

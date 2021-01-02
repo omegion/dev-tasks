@@ -73,11 +73,13 @@ jobs:
         with:
           path: artifacts
 
-      - name: Changelog
-        uses: scottbrenner/generate-changelog-action@master
-        id: Changelog
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@main
+        with:
+          configuration: ".github/changelog_configuration.json"
         env:
-          REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -85,7 +87,7 @@ jobs:
         with:
           name: Release ${{ steps.get_version.outputs.VERSION }}
           body: |
-            ${{ steps.Changelog.outputs.changelog }}
+            ${{steps.github_release.outputs.changelog}}
           files: |
             artifacts/**/*
         env:
