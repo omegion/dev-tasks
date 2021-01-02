@@ -2,7 +2,7 @@
   "name": "dev-tasks",
   "author": "omegion <oomegion@gmail.com>",
   "description": "An Developer Task Management Tool",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/main",
   "build": {
     "productName": "Dev Tasks",
