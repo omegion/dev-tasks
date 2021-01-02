@@ -1,4 +1,5 @@
 .PHONY: release-tag
 release-tag:
-	 git tag v$(version)
-	 git push origin v$(version)
+	git checkout master & git pull
+	git tag v$(version)
+	git push origin v$(version)
