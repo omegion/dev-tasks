@@ -8,7 +8,7 @@
       :overlay="true"
       :right="true"
       :can-cancel="['escape']"
-      class="is-medium"
+      class="is-medium is-right"
     >
       <div class="section">
         <b-field label="Repositories">

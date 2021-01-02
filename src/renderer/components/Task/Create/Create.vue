@@ -8,7 +8,7 @@
       :overlay="true"
       :right="true"
       :can-cancel="['escape']"
-      class="is-medium"
+      class="is-large is-right"
     >
       <div class="section">
         <p class="pb-5">Create a task for a project.</p>

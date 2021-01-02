@@ -8,7 +8,7 @@
       :can-cancel="['escape']"
       :overlay="true"
       :right="true"
-      class="is-medium"
+      class="is-medium is-right"
     >
       <ValidationObserver
         v-if="showModal"
@@ -70,37 +70,37 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
+import { computed, defineComponent, ref } from "@nuxtjs/composition-api";
 import {
   ValidationObserver,
   ValidationProvider
-} from 'vee-validate/dist/vee-validate.full'
+} from "vee-validate/dist/vee-validate.full";
 
-import Helpers from '~/plugins/helpers'
-import Project from '~/models/Project'
+import Helpers from "~/plugins/helpers";
+import Project from "~/models/Project";
 
 export default defineComponent({
-  name: 'ProjectEdit',
+  name: "ProjectEdit",
   components: {
     ValidationObserver,
     ValidationProvider
   },
-  setup (props, { root }) {
-    const showModal = ref(false)
-    const keyword = ref('')
-    const types = ref(['is-primary', 'is-danger', 'is-success', 'is-light'])
-    const saveButtonLoading = ref(false)
+  setup(props, { root }) {
+    const showModal = ref(false);
+    const keyword = ref("");
+    const types = ref(["is-primary", "is-danger", "is-success", "is-light"]);
+    const saveButtonLoading = ref(false);
 
     const toggle = () => {
-      showModal.value = !showModal.value
-    }
+      showModal.value = !showModal.value;
+    };
 
-    const project = computed(() => Project.find(root.$route.params.project_id))
+    const project = computed(() => Project.find(root.$route.params.project_id));
 
-    const iconList = computed(() => Project.iconList())
+    const iconList = computed(() => Project.iconList());
 
     const updateProject = async (closeSidebar = true) => {
-      saveButtonLoading.value = true
+      saveButtonLoading.value = true;
       await Project.update({
         where: project.value.$id,
         data: {
@@ -109,17 +109,17 @@ export default defineComponent({
           icon: project.value.icon
         }
       }).finally(async () => {
-        await Helpers.delay(200)
-        saveButtonLoading.value = false
+        await Helpers.delay(200);
+        saveButtonLoading.value = false;
         if (closeSidebar) {
-          toggle()
+          toggle();
         }
-      })
-    }
+      });
+    };
     const setIcon = async icon => {
-      project.value.icon = icon
-      await updateProject(false)
-    }
+      project.value.icon = icon;
+      await updateProject(false);
+    };
 
     return {
       showModal,
@@ -131,7 +131,7 @@ export default defineComponent({
       toggle,
       updateProject,
       setIcon
-    }
+    };
   }
-})
+});
 </script>

@@ -135,6 +135,14 @@ body {
     }
   }
 
+  &.is-right {
+    .sidebar-content {
+      .footer {
+        position: fixed;
+      }
+    }
+  }
+
   .sidebar-content {
     height: 100%;
     padding: 1em;

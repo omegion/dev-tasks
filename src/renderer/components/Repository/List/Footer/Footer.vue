@@ -1,39 +1,25 @@
 <template>
   <footer class="repository-list-footer has-text-centered px-4">
-    <b-button
-      class="mt-3"
-      type="is-primary"
-      expanded
-      :loading="saveButtonLoading"
-      icon-left="plus"
-      @click="addRepository"
-    >
-      Add Repository
-    </b-button>
+    <create ref="repositoryCreate">
+      <b-button
+        class="mt-3"
+        type="is-primary"
+        expanded
+        icon-left="plus"
+        @click="$refs.repositoryCreate.toggle()"
+      >
+        Add Repository
+      </b-button>
+    </create>
   </footer>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
-import Helpers from '~/plugins/helpers'
-import Repository from '~/models/Repository'
+import { defineComponent } from "@nuxtjs/composition-api";
+import Create from "~/components/Repository/Create.vue";
 
 export default defineComponent({
-  name: 'Footer',
-  components: {},
-  setup (props, { root }) {
-    const saveButtonLoading = ref(false)
-
-    const addRepository = async () => {
-      saveButtonLoading.value = true
-
-      await Repository.insertDefault()
-
-      await Helpers.delay(200)
-      saveButtonLoading.value = false
-    }
-
-    return { saveButtonLoading, addRepository }
-  }
-})
+  name: "Footer",
+  components: { Create }
+});
 </script>

@@ -8,7 +8,7 @@
       :overlay="true"
       :right="true"
       :can-cancel="['escape']"
-      class="is-xlarge"
+      class="is-xlarge is-right"
     >
       <div class="section">
         <div class="task-dependencies">
@@ -28,8 +28,8 @@
 import {
   defineComponent,
   onMounted,
-  ref,
-  onUnmounted
+  onUnmounted,
+  ref
 } from "@nuxtjs/composition-api";
 import Node from "~/components/Task/Dependency/Node.vue";
 import Task from "~/models/Task";
