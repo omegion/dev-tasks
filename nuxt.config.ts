@@ -27,7 +27,7 @@ const config: Configuration = {
     { ssr: true, src: "@/plugins/buefy.js" },
     { ssr: true, src: "@/plugins/filters.js" },
     { ssr: true, src: "@/plugins/jobs.ts" },
-    { ssr: true, src: "@/plugins/ips-renderer.js" },
+    { ssr: true, src: "@/plugins/ips-events.ts" },
     { ssr: true, src: "@/plugins/sentry.js" }
   ],
   build: {

@@ -391,4 +391,10 @@
       }
     }
   }
+
+  // Snackbar
+  .notices .snackbar {
+    background: $dark-light;
+    border: 1px solid $dark-lighter;
+  }
 }

@@ -14,7 +14,6 @@ export default defineNuxtMiddleware(ctx => {
   } else {
     return Project.insertDefault()
       .then(data => {
-        console.log(data.projects[0].$id);
         return ctx.redirect({
           name: "projects.project_id.tasks",
           params: { project_id: data.projects[0].$id }
