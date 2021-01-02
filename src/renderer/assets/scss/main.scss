@@ -538,3 +538,8 @@ body.has-navbar-fixed-top {
     border-bottom: 1px solid $border;
   }
 }
+
+code {
+  border-radius: $radius;
+  border: 1px solid $border;
+}

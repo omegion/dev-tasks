@@ -1,7 +1,7 @@
 <template>
   <section>
     <list-header v-model="keyword" />
-    <div class="repository-list" ref="repositoryListRef">
+    <div class="repository-list">
       <b-table
         :data="repositories"
         :row-class="(row, index) => row.id === routeTaskId && 'is-selected'"
@@ -39,7 +39,6 @@ import ListItem from "~/components/Repository/List/Item.vue";
 import ListFooter from "~/components/Repository/List/Footer/Footer.vue";
 import ListHeader from "~/components/Repository/List/Header/Header.vue";
 import Repository from "~/models/Repository.ts";
-import PerfectScrollbar from "perfect-scrollbar";
 
 export default defineComponent({
   name: "NavBar",
@@ -51,7 +50,6 @@ export default defineComponent({
   setup(props, { root }) {
     const keyword = ref(null);
     const tags = ref([]);
-    const repositoryListRef = ref(null);
 
     const { params } = useContext();
 
@@ -70,20 +68,9 @@ export default defineComponent({
       return root.$route.params.task_id;
     };
 
-    const perfectScrollBar = () => {
-      const ps = new PerfectScrollbar(repositoryListRef.value, {
-        wheelPropagation: true
-      });
-    };
-
-    onMounted(() => {
-      perfectScrollBar();
-    });
-
     return {
       keyword,
       tags,
-      repositoryListRef,
       routeTaskId,
       repositories,
       params

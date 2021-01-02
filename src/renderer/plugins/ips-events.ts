@@ -4,7 +4,7 @@ import Repository from "~/models/Repository";
 import { SnackbarProgrammatic as Snackbar } from "buefy";
 import Task from "~/models/Task";
 
-export default function(ctx, { app }) {
+export default function(ctx) {
   ipcRenderer.on("menu:new-task", () => {
     if (ctx.route.name.startsWith("projects.project_id.tasks")) {
       Task.insertDefault(ctx.route.params.project_id).then(resp => {
@@ -26,11 +26,15 @@ export default function(ctx, { app }) {
   });
 
   ipcRenderer.on("menu:new-repository", () => {
-    app.router.push("/repositories");
+    ctx.app.router.push("/repositories");
     Repository.insertDefault().then(r => {});
   });
 
   ipcRenderer.on("route:push", (event, args) => {
-    app.router.push(args.route);
+    ctx.app.router.push(args.route);
+  });
+
+  ipcRenderer.on("shortcuts:show", () => {
+    ctx.app.$emitter.emit("shortcuts:show");
   });
 }

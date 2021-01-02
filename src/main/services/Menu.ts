@@ -148,6 +148,15 @@ export default class MainMenu {
         role: "help",
         submenu: [
           {
+            label: "Shortcuts",
+            click() {
+              that.mainBrowserWindow.webContents.send("shortcuts:show");
+            }
+          },
+          {
+            type: "separator"
+          },
+          {
             label: "Release Notes",
             click() {
               shell.openExternal(`${GITHUB_REPOSITORY}/releases`);
