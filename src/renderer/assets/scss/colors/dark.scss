@@ -316,8 +316,12 @@
       border: 1px solid $dark-lighter;
 
       .ce-settings__button {
+        color: $dark-text;
         &:hover {
           background-color: $dark-lighter;
+        }
+        &--confirm {
+          color: $white-ter;
         }
       }
     }
@@ -335,8 +339,8 @@
     .cdx-checklist {
       &__item {
         &-checkbox {
-          border: 1px solid $dark-lighter;
-          background: $dark-light;
+          border: 1px solid $grey-dark;
+          background: $dark-lighter;
         }
 
         &--checked {

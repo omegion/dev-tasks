@@ -64,11 +64,11 @@ export default defineComponent({
       },
       {
         name: "Project",
-        shortcuts: [{ name: "New Project", shortcut: "⌘/ctrl + R" }]
+        shortcuts: [{ name: "New Project", shortcut: "⌘/ctrl + P" }]
       },
       {
         name: "Repository",
-        shortcuts: [{ name: "New Repository", shortcut: "⌘/ctrl + P" }]
+        shortcuts: [{ name: "New Repository", shortcut: "⌘/ctrl + R" }]
       }
     ]);
 
