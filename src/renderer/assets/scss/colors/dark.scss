@@ -352,15 +352,40 @@
       }
     }
 
+    .ce-inline-toolbar{
+      .ce-inline-toolbar__toggler-and-button-wrapper{
+        background-color: $dark-lighter;
+        border-radius: $radius;
+      }
+
+      .ce-inline-tool {
+        &:hover {
+          color: $white-ter;
+          background-color: rgba(34,186,255,.08)!important;
+        }
+      }
+
+      .ce-conversion-toolbar {
+        background-color: $dark-lighter;
+        .ce-conversion-tool {
+          &:hover{
+            background-color: rgba(34,186,255,.08)!important;
+          }
+        }
+      }
+
+      .ce-inline-toolbar__dropdown {
+        &:hover{
+          color: $white-ter;
+          background-color: rgba(34,186,255,.08)!important;
+        }
+      }
+    }
     .tc-table__wrap {
       border: 1px solid $dark-lighter;
 
       .tc-table__cell {
         border: 1px solid $dark-lighter;
-      }
-
-      tc-table {
-
       }
     }
   }
