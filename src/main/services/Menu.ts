@@ -121,7 +121,7 @@ export default class MainMenu {
         label: "Developer",
         submenu: [
           {
-            role: "reload"
+            role: "forceReload"
           },
           {
             role: "toggleDevTools"
