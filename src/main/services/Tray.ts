@@ -23,10 +23,15 @@ export default class Tray {
   create() {
     this.tray = new ETray(this.getTrayIconPath());
     this.tray.setIgnoreDoubleClickEvents(true);
-    this.tray.setContextMenu(this.contextMenu);
 
-    this.tray.on("click", event => {
+    this.tray.on("click", evt => {
+      this.tray.setContextMenu(null);
       this.showTrayWindow();
+    });
+
+    this.tray.on("right-click", evt => {
+      this.tray.setContextMenu(this.contextMenu);
+      this.tray.popUpContextMenu();
     });
 
     this.createWindow();
