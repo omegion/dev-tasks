@@ -89,6 +89,9 @@ export default class MainMenu {
           },
           {
             role: "paste"
+          },
+          {
+            role: "selectAll"
           }
         ]
       },
