@@ -89,6 +89,9 @@ export default class MainMenu {
           },
           {
             role: "paste"
+          },
+          {
+            role: "selectAll"
           }
         ]
       },
@@ -118,7 +121,7 @@ export default class MainMenu {
         label: "Developer",
         submenu: [
           {
-            role: "reload"
+            role: Platform.isProduction() ? "forceReload" : "reload"
           },
           {
             role: "toggleDevTools"
