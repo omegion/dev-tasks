@@ -121,10 +121,7 @@ export default class MainMenu {
         label: "Developer",
         submenu: [
           {
-            role: Platform.isProduction() ? "forceReload" : "reload"
-          },
-          {
-            role: "toggleDevTools"
+            role: Platform.isProduction() ? "toggleDevTools" : "reload"
           },
           {
             type: "separator"
