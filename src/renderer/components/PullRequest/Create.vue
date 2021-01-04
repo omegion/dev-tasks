@@ -60,7 +60,7 @@
               :loading="saveButtonLoading"
               @click="addPullRequest"
             >
-              Save
+              Add
             </b-button>
             <b-button @click="toggle">Cancel</b-button>
           </div>
@@ -125,6 +125,7 @@ export default defineComponent({
       keyword.value = null;
       selected.value = null;
       selectedPullRequest.value = null;
+      pullRequestKeyword.value = "";
     };
 
     const toggle = () => {
