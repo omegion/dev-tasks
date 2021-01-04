@@ -308,6 +308,10 @@
       .ce-toolbox {
         background: $dark-lighter;
         border-radius: $radius;
+        border: 1px solid $grey-darker;
+        .ce-toolbox__button {
+          color: $dark-text;
+        }
       }
     }
 
@@ -315,17 +319,21 @@
       background-color: $dark-light;
       border: 1px solid $dark-lighter;
 
-      .ce-settings__button {
+      .ce-settings__button,.cdx-settings-button {
         color: $dark-text;
         &:hover {
           background-color: $dark-lighter;
         }
-        &--confirm {
-          color: $white-ter;
+        &--confirm, &--active {
+          color: $primary;
         }
       }
+
     }
 
+    .ce-inline-tool {
+      color: $dark-text;
+    }
     .cdx-codemirror {
       .CodeMirror {
         background-color: $dark-light !important;
@@ -356,6 +364,7 @@
       .ce-inline-toolbar__toggler-and-button-wrapper{
         background-color: $dark-lighter;
         border-radius: $radius;
+        border: 1px solid $grey-darker;
       }
 
       .ce-inline-tool {
