@@ -68,21 +68,26 @@ export default class PullRequest extends Model {
   }
 
   get mergeStateIcon() {
-    if (this.state === "closed") {
+    if (this.merged) {
+      return {
+        icon: "source-merge",
+        type: "is-success",
+        text: "Merged"
+      };
+    } else if (this.state === "closed") {
       return {
         icon: "close-circle",
         type: "is-grey",
         text: "Closed"
       };
-    }
-
-    if (this.mergeable_state === "clean") {
+    } else if (this.mergeable_state === "clean") {
       return {
         icon: "check-circle",
         type: "is-success",
         text: "Clean"
       };
     }
+
     return {
       icon: "minus-circle",
       type: "is-danger",
@@ -94,6 +99,7 @@ export default class PullRequest extends Model {
   name: string;
   pull_number: number;
   state: "open" | "closed";
+  merged: boolean;
   mergeable_state:
     | "behind"
     | "blocked"
