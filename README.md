@@ -24,13 +24,15 @@ A free and open source task management tool for developers.
 However, the amount of effort needed to maintain and develop new features for the project is not sustainable without
 proper financial backing. You can support Dev Tasks development via the following methods:
 
-SOON
+<p align="center">
+    <img alt="Donate Buy Me a Coffee" src="https://img.shields.io/badge/donate-Buy%20Me%20a%20Coffee-yellow?style=flat&logo=buy-me-a-coffee&link=https://www.buymeacoffee.com/omegion">
+</p>
 
 ## Overview
 The aim of creating Dev Tasks is to help developers to organize their daily tasks. As a developer, I needed an application
 to take notes, create code snippets and follow my pull requests in a single application.
 
-Dev Tasks allows you to create tasks, take notes with a very rich editor (EditorJS) and assign your pull requests to the task.
+Dev Tasks allows you to create tasks, take notes with a very rich [editor](https://editorjs.io/) and assign your pull requests to the task.
 
 ## Development
 
