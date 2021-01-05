@@ -25,7 +25,7 @@ However, the amount of effort needed to maintain and develop new features for th
 proper financial backing. You can support Dev Tasks development via the following methods:
 
 <p align="center">
-    <img alt="Donate Buy Me a Coffee" src="https://img.shields.io/badge/donate-Buy%20Me%20a%20Coffee-yellow?style=flat&logo=buy-me-a-coffee&link=https://www.buymeacoffee.com/omegion">
+    [![Donate Buy Me a Coffee](https://img.shields.io/badge/donate-Buy%20Me%20a%20Coffee-yellow?style=flat&logo=buy-me-a-coffee)](https://www.buymeacoffee.com/omegion)
 </p>
 
 ## Overview
