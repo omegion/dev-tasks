@@ -27,8 +27,10 @@ proper financial backing. You can support Dev Tasks development via the followin
 SOON
 
 ## Overview
+The aim of creating Dev Tasks is to help developers to organize their daily tasks. As a developer, I needed an application
+to take notes, create code snippets and follow my pull requests in a single application.
 
-SOON
+Dev Tasks allows you to create tasks, take notes with a very rich editor (EditorJS) and assign your pull requests to the task.
 
 ## Development
 
