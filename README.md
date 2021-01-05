@@ -14,7 +14,7 @@ A free and open source task management tool for developers.
 <p align="center">
     <img src="./static/dev-tasks-mockup.png">
     <br>  
-    <strong>Built with Electron and Vue.</strong>
+    <strong>Built with Vue and Electron.</strong>
 </p>
 
 ## Supporting
