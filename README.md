@@ -14,7 +14,7 @@ A free and open source task management tool for developers.
 <p align="center">
     <img src="./static/dev-tasks-mockup.png">
     <br>  
-    <strong>Built with Electron and Vue.</strong>
+    <strong>Built with Vue and Electron.</strong>
 </p>
 
 ## Supporting
@@ -24,11 +24,17 @@ A free and open source task management tool for developers.
 However, the amount of effort needed to maintain and develop new features for the project is not sustainable without
 proper financial backing. You can support Dev Tasks development via the following methods:
 
-SOON
+<p align="center">
+
+[![Donate](https://img.shields.io/badge/donate-Buy%20Me%20a%20Coffee-yellow?style=popout&logo=buy-me-a-coffee)](https://www.buymeacoffee.com/omegion)
+
+</p>
 
 ## Overview
+The aim of creating Dev Tasks is to help developers to organize their daily tasks. As a developer, I needed an application
+to take notes, create code snippets and follow my pull requests in a single application.
 
-SOON
+Dev Tasks allows you to create tasks, take notes with a very rich [editor](https://editorjs.io/) and assign your pull requests to the task.
 
 ## Development
 
